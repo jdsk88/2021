@@ -1,9 +1,15 @@
 {
-  "home": "Heimat",
-  "creator": "Schöpfer",
-  "todolist": "Aufgabenliste",
-  "settings": "die Einstellungen",
-  "installable": "Installiere die App",
-  "signin": "anmelden",
-  "title": "Aufgabenlisten-App"
+  "dashboard": "Board",
+  "aboutme": "Über mich",
+  "soft": "Soft Skills",
+  "hard": "Hartfertigkeit",
+  "education": "Edukacja",
+  "jobhistory": "Arbeitsgeschichte",
+  "technology": "Technologien",
+  "web": "Web",
+  "mobile": "Mobil",
+  "standalone": "Stationär",
+  "pricing": "Preisliste",
+  "contact": "Kontakt"
 }
+

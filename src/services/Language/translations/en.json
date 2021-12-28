@@ -1,9 +1,14 @@
 {
-  "home": "Home page",
-  "creator": "Creator",
-  "todolist": "Todo Lists",
-  "settings": "Settings",
-  "installable":"Install the app",
-  "signin":"log in",
-  "title":"Todo List App"
+  "dashboard": "Dashboard",
+  "aboutme": "About me",
+  "soft": "Soft skills",
+  "hard": "Hard skills",
+  "education": "Edukacja",
+  "jobhistory": "Work history",
+  "technology": "Technologies",
+  "web": "Web",
+  "mobile": "Mobilne",
+  "standalone": "Stationary",
+  "pricing": "Price list",
+  "contact": "Contact"
 }

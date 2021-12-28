@@ -11,12 +11,14 @@ import {
 export const initialState = {
   isOpen: [],
   opened: false,
+  resizer:"",
   theme: config.theme,
   language: config.language,
 };
 
 const configurationReducer = (state = initialState, action) => {
   let id;
+  console.log(state);
   switch (action.type) {
     case SET_THEME:
       return {

@@ -5,7 +5,7 @@ import { SET_LANGUAGE } from "store/actions.js";
 
 const lang = ["pl", "ru", "de", "en"];
 
-export const LanguageSelector = () => {
+export const LanguageSelector = ({ color }) => {
   const configuration = useSelector((state) => state.configuration);
   const dispatch = useDispatch();
 
@@ -21,13 +21,13 @@ export const LanguageSelector = () => {
     setLanguage(configuration.language);
   }, [configuration]);
   return (
-    <FormControl>
+    <FormControl style={{ height: "100%" }}>
       <Select
         variant="outlined"
-        size="small"
         id="language-select"
         value={language}
         onChange={(e) => handleSetLanguage(e)}
+        style={{ color: color, height: "100%" }}
       >
         {lang.map((l, i) => (
           <MenuItem key={i} value={l}>

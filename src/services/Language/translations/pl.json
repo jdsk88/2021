@@ -1,9 +1,15 @@
 {
-  "home": "Strona główna",
-  "creator": "Kreator",
-  "todolist": "Do Zrobienia",
-  "settings": "Ustawienia",
-  "installable": "Zainstaluj Aplicakję",
-  "signin": "Zaloguj",
-  "title":"Twoje listy zadań"
+  "dashboard": "Tablica",
+  "aboutme": "O mnie",
+  "soft": "Umiejętności miękkie",
+  "hard": "Umiejętności twarde",
+  "education": "Edukacja",
+  "jobhistory": "Historia pracy",
+  "technology": "Technologie",
+  "web": "Web",
+  "mobile": "Mobilne",
+  "standalone": "Stacjonarne",
+  "pricing": "Cennik",
+  "contact": "Kontakt"
 }
+
