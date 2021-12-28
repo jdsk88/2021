@@ -10,5 +10,7 @@
   "mobile": "мобильный",
   "standalone": "автономный",
   "pricing": "ценообразование",
-  "contact": "контакт"
+  "contact": "контакт",
+  "languageselect":"Язык:"
+
 }

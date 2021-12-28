@@ -1,11 +1,12 @@
 import PropTypes from "prop-types";
 import { useTheme } from "@mui/material/styles";
-import { Box, Drawer, useMediaQuery } from "@mui/material";
+import { Box, Drawer,  useMediaQuery } from "@mui/material";
 import PerfectScrollbar from "react-perfect-scrollbar";
 import { BrowserView, MobileView } from "react-device-detect";
 
 import { drawerWidth } from "store/constants";
 import MenuList from "./List";
+import { LanguageSelector } from "services/Language/select";
 
 const SideMenu = ({ drawerOpen, drawerToggle, window }) => {
   const theme = useTheme();
@@ -23,7 +24,7 @@ const SideMenu = ({ drawerOpen, drawerToggle, window }) => {
         <PerfectScrollbar
           component="div"
           style={{
-            // height: !resizer ? "calc(100vh - 56px)" : "calc(100vh - 88px)",
+            height: resizer ? "calc(100% - 56px)" : "calc(100% - 48px)",
             paddingLeft: "16px",
             paddingRight: "16px",
           }}
@@ -32,8 +33,23 @@ const SideMenu = ({ drawerOpen, drawerToggle, window }) => {
         </PerfectScrollbar>
       </BrowserView>
       <MobileView>
-        <Box sx={{ px: 2 }}>
+        <Box
+          sx={{
+            px: 2,
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "space-between",
+          }}
+        >
           <MenuList />
+          <Box
+            sx={{
+              width: "100%",
+              height: 25,
+            }}
+          >
+            <LanguageSelector fullWidth />
+          </Box>
         </Box>
       </MobileView>
     </>

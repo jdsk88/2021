@@ -51,7 +51,7 @@ const MenuGroup = ({ item }) => {
         {items}
       </List>
 
-      <Divider sx={{ mt: 0.1, mb: 0.1 }} />
+      <Divider sx={{ mt: .5, mb: 2.5 }} />
     </>
   );
 };
