@@ -11,5 +11,6 @@
   "standalone": "Stacjonarne",
   "pricing": "Cennik",
   "contact": "Kontakt",
-  "languageselect": "Język:"
+  "languageselect": "Język:",
+  "breadcrumb_home": "Start"
 }

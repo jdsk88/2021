@@ -1,5 +1,11 @@
 import { Outlet } from "react-router-dom";
-import { Box, useMediaQuery, CssBaseline } from "@mui/material";
+import {
+  Box,
+  useMediaQuery,
+  CssBaseline,
+  Container,
+  Grid,
+} from "@mui/material";
 import { StyledMain } from "./Main";
 import { useTheme } from "@mui/material/styles";
 import { useDispatch, useSelector } from "react-redux";
@@ -7,6 +13,8 @@ import { SET_MENU_STATE } from "store/actions";
 import SideMenu from "./SideMenu";
 import PrimarySearchAppBar from "./Header";
 import { Wrapper } from "components/atoms/Wrapper/Wrapper";
+import IconBreadcrumbs from "components/atoms/Breadcrumbs";
+import React, { useState, useEffect } from "react";
 
 const LayoutMain = () => {
   const theme = useTheme();
@@ -16,7 +24,11 @@ const LayoutMain = () => {
   const handleMenuToggle = () => {
     dispatch({ type: SET_MENU_STATE, opened: !menuOpened });
   };
-
+  const url = window.location.pathname;
+  const [URL, setURL] = useState("/");
+  useEffect(() => {
+    setURL(url);
+  }, [url]);
   return (
     <>
       <PrimarySearchAppBar drawerToggle={handleMenuToggle} />
@@ -33,7 +45,16 @@ const LayoutMain = () => {
           resizer={resizer ? { size: "mobile" } : { size: "desktop" }}
         >
           <Wrapper>
-            <Outlet />
+            <Container
+              maxWidth="xl"
+              component="main"
+              sx={{ pt: 0, pb: 3, mt: 1 }}
+            >
+              <Grid container spacing={1} alignItems="flex-end">
+                <IconBreadcrumbs url={URL} />
+                <Outlet />
+              </Grid>
+            </Container>
           </Wrapper>
         </StyledMain>
       </Box>

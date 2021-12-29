@@ -6,19 +6,21 @@ import {
   SET_LANGUAGE,
   SET_MENU_STATE,
   MENU_OPEN,
+  SET_ROLE,
 } from "../actions.js";
 
 export const initialState = {
   isOpen: [],
   opened: false,
-  resizer:"",
+  resizer: "",
   theme: config.theme,
   language: config.language,
+  role: config.role,
 };
 
 const configurationReducer = (state = initialState, action) => {
   let id;
-  // console.log(state);
+  console.log(state);
   switch (action.type) {
     case SET_THEME:
       return {
@@ -29,6 +31,11 @@ const configurationReducer = (state = initialState, action) => {
       return {
         ...state,
         language: action.language,
+      };
+    case SET_ROLE:
+      return {
+        ...state,
+        role: action.role,
       };
     case SET_MENU_STATE:
       return {

@@ -16,6 +16,10 @@ const Main = {
       element: <UserProfile />,
     },
     {
+      path: "/cv/aboutme",
+      element: <UserProfile />,
+    },
+    {
       path: "/cv/softskills",
       element: <h1>softskills </h1>,
     },

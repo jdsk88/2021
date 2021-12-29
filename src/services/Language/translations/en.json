@@ -11,5 +11,6 @@
   "standalone": "Stationary",
   "pricing": "Price list",
   "contact": "Contact",
-  "languageselect":"Langaue:"
+  "languageselect": "Langaue:",
+  "breadcrumb_home": "Home"
 }
