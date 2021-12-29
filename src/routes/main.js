@@ -5,6 +5,7 @@ import LayoutMain from "layouts/Main";
 const Pricing = Lazy(lazy(() => import("views/pages/Pricing")));
 const Contact = Lazy(lazy(() => import("views/pages/Contact")));
 const Dashboard = Lazy(lazy(() => import("views/pages/Dashboard")));
+const UserProfile = Lazy(lazy(() => import("views/pages/UserProfile")));
 
 const Main = {
   path: "/",
@@ -12,7 +13,7 @@ const Main = {
   children: [
     {
       path: "/cv/aboutme",
-      element: <h1>aboutme </h1>,
+      element: <UserProfile />,
     },
     {
       path: "/cv/softskills",

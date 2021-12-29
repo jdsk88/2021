@@ -36,6 +36,13 @@ const main_items = {
       icon: AssignmentInd,
       children: [
         {
+          id: "aboutme",
+          title: <FormattedMessage id="aboutme" />,
+          type: "item",
+          url: "/cv/aboutme",
+          icon: AccessibilityNew,
+        },
+        {
           id: "soft",
           title: <FormattedMessage id="soft" />,
           type: "item",
