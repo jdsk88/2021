@@ -7,7 +7,7 @@ import Paper from "@mui/material/Paper";
 // import Chart from "./Chart";
 import Deposits from "./Deposits";
 import Orders from "./Orders";
-import { Button, useMediaQuery } from "@mui/material";
+import { Button, NativeSelect, useMediaQuery } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { useDispatch, useSelector } from "react-redux";
 import EventInfo from "./Click";
@@ -16,6 +16,7 @@ import ApexChart from "./ApexChart";
 import {
   CRYPTO_ALL,
   CRYPTO_CODES,
+  CRYPTO_CODES_GET,
   CRYPTO_WIDGETDATA,
   GLOBAL_CLICKER_STATE,
 } from "store/actions";
@@ -27,7 +28,9 @@ function DashboardContent() {
   const dispatch = useDispatch();
   const charts = useSelector((state) => state.dashboard.charts);
   const cryptocharts = useSelector((state) => state.crypto.widgets);
-  console.log(cryptocharts);
+  const cryptocurrencies = useSelector((state) => state.crypto.data);
+  const crypto_symbols = useSelector((state) => state.crypto.symbols);
+  console.log(crypto_symbols);
   const clicks = useSelector((state) => state.global.clicks);
   let clxarr = [];
   clicks.forEach((click, i) => {
@@ -187,26 +190,29 @@ function DashboardContent() {
     },
   ];
   const crypto = {
-    height: 224,
+    height: 350,
     type: "bar",
     options: {
       chart: {
         id: "crypto-chart",
+        stacked: true,
+        // stackType: "100%",
         sparkline: {
           enabled: true,
         },
       },
       plotOptions: {
         bar: {
-          columnWidth: "55%",
+          // columnWidth: "100%",
           distributed: true,
+          horizontal: false,
         },
       },
       dataLabels: {
         enabled: false,
       },
       stroke: {
-        width: 0,
+        width: 1,
       },
       xaxis: {
         categories: cryptocharts.length > 0 ? cryptocharts[0].exchange : null,
@@ -219,41 +225,89 @@ function DashboardContent() {
       },
     ],
   };
-  console.log(crypto);
+
+  const line = {
+    height: 600,
+    type: "area",
+    options: {
+      chart: {
+        id: "market-sale-chart",
+        toolbar: {
+          show: true,
+        },
+        zoom: {
+          enabled: true,
+        },
+        sparkline: {
+          enabled: true,
+        },
+      },
+      dataLabels: {
+        enabled: true,
+      },
+      stroke: {
+        curve: "smooth",
+        width: 2,
+      },
+      fill: {
+        type: "gradient",
+        gradient: {
+          shadeIntensity: 1,
+          opacityFrom: 0.5,
+          opacityTo: 0,
+          stops: [0, 80, 100],
+        },
+      },
+      legend: {
+        show: true,
+      },
+      yaxis: {
+        min: 1,
+        max: 1000000,
+        labels: {
+          show: false,
+        },
+      },
+    },
+    series: [
+      {
+        name: "clientX",
+        data: xarr,
+      },
+      {
+        name: "clientY",
+        data: yarr,
+      },
+    ],
+  };
+  const handleNativeSelect = (value) => {
+    CryptoServices.getWidgetData(dispatch, value);
+  };
   React.useEffect(() => {
+    CryptoServices.getSymbols(dispatch);
+    dispatch({ type: CRYPTO_CODES });
+    dispatch({ type: CRYPTO_CODES_GET });
     dispatch({ type: GLOBAL_CLICKER_STATE });
     dispatch({ type: CRYPTO_WIDGETDATA });
     dispatch({ type: CRYPTO_ALL });
   }, [dispatch]);
   return (
     <>
-      <Button onClick={() => CryptoServices.getWidgetData(dispatch, "btc")}>
-        get crypto widget
-      </Button>
-      <Button
-        onClick={() => {
-          CryptoServices.getAllData(dispatch);
-          dispatch({ type: CRYPTO_ALL });
-        }}
-      >
-        get crypto data
-      </Button>
-      {cryptocharts.length < 1 ? <></> : <ApexChart data={crypto} />}
-
-      {/* {data.map((chart, i) => (
-        <Grid item xs={12} md={6} lg={6}>
-          <Paper
-            sx={{
-              p: 2,
-              display: "flex",
-              flexDirection: "column",
-            }}
-          >
-            <ApexChart data={chart} />
-          </Paper>
-        </Grid>
-      ))}
-      {clicks.at(-1) ? <EventInfo data={clicks.at(-1)} /> : <></>} */}
+      <Grid item xs={12} sm={12} md={12}>
+        <NativeSelect
+          fullWidth
+          onChange={(e) => handleNativeSelect(e.currentTarget.value)}
+        >
+          <option disabled value={"btc"}>
+            Choose cryptocurrency (default: btc)
+          </option>
+          {crypto_symbols[1] &&
+            crypto_symbols[1].map((symbol) => (
+              <option value={symbol}>{symbol}</option>
+            ))}
+        </NativeSelect>
+        {cryptocharts.length < 1 ? <></> : <ApexChart data={crypto} />}
+      </Grid>
     </>
   );
 }

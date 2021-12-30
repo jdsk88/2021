@@ -25,6 +25,7 @@ export const GLOBAL_KEYLOGGER = "@global/GLOBAL_KEYLOGGER";
 export const GLOBAL_CLICKER_STATE = "@global/GLOBAL_CLICKER_STATE";
 
 export const CRYPTO_CODES = "@crypto/currencies";
+export const CRYPTO_CODES_GET = "@crypto/get_currencies_codes";
 export const CRYPTO_ADD = "@crypto/currencies/add";
 export const CRYPTO_ALL = "@crypto/currencies/all";
 export const CRYPTO_CURRENCY = "@crypto/currencies/:currency";

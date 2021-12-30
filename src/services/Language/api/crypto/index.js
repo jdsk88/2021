@@ -21,8 +21,12 @@ const CryptoServices = {
       payload: res.data,
     });
   },
-  getSymbolData: async (params) => {
-    return await api.get(`/crypto/currencies/${params}`);
+  getSymbols: async (dispatch) => {
+    const res = await api.get(`/crypto/currencies`);
+    return dispatch({
+      type: CRYPTO_CODES,
+      payload: res.data,
+    });
   },
 };
 export default CryptoServices;
