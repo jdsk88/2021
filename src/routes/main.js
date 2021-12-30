@@ -6,6 +6,7 @@ const Pricing = Lazy(lazy(() => import("views/pages/Pricing")));
 const Contact = Lazy(lazy(() => import("views/pages/Contact")));
 const Dashboard = Lazy(lazy(() => import("views/pages/Dashboard")));
 const UserProfile = Lazy(lazy(() => import("views/pages/UserProfile")));
+const Feeds = Lazy(lazy(() => import("views/pages/Feeds")));
 
 const Main = {
   path: "/",
@@ -62,6 +63,10 @@ const Main = {
     {
       path: "/dashboard",
       element: <Dashboard />,
+    },
+    {
+      path: "/feeds",
+      element: <Feeds />,
     },
   ],
 };

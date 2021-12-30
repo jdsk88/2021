@@ -8,6 +8,7 @@ import App from "App";
 import reportWebVitals from "reportWebVitals";
 import { SnackbarProvider } from "notistack";
 import Zoom from "@mui/material/Zoom";
+import "resize-observer-polyfill/dist/ResizeObserver.global";
 
 ReactDOM.render(
   <Provider store={store}>

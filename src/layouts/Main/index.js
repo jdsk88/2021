@@ -9,7 +9,11 @@ import {
 import { StyledMain } from "./Main";
 import { useTheme } from "@mui/material/styles";
 import { useDispatch, useSelector } from "react-redux";
-import { SET_MENU_STATE } from "store/actions";
+import {
+  GLOBAL_CLICKER_STATE,
+  GLOBAL_MOUSE_CLICK_COUNTER,
+  SET_MENU_STATE,
+} from "store/actions";
 import SideMenu from "./SideMenu";
 import PrimarySearchAppBar from "./Header";
 import { Wrapper } from "components/atoms/Wrapper/Wrapper";
@@ -20,6 +24,7 @@ const LayoutMain = () => {
   const theme = useTheme();
   const resizer = useMediaQuery(theme.breakpoints.down("md"));
   const menuOpened = useSelector((state) => state.configuration.opened);
+  const clicks = useSelector((state) => state.global.clicks);
   const dispatch = useDispatch();
   const handleMenuToggle = () => {
     dispatch({ type: SET_MENU_STATE, opened: !menuOpened });
@@ -29,6 +34,10 @@ const LayoutMain = () => {
   useEffect(() => {
     setURL(url);
   }, [url]);
+  useEffect(() => {
+    dispatch({ type: GLOBAL_CLICKER_STATE });
+  }, [url, dispatch]);
+
   return (
     <>
       <PrimarySearchAppBar drawerToggle={handleMenuToggle} />
@@ -40,13 +49,17 @@ const LayoutMain = () => {
         <CssBaseline />
         <SideMenu drawerOpen={menuOpened} drawerToggle={handleMenuToggle} />
         <StyledMain
+          onClick={(e) => {
+            dispatch({ type: GLOBAL_MOUSE_CLICK_COUNTER, payload: e });
+            dispatch({ type: GLOBAL_CLICKER_STATE });
+          }}
           theme={theme}
           open={menuOpened}
           resizer={resizer ? { size: "mobile" } : { size: "desktop" }}
         >
           <Wrapper>
             <Container
-              maxWidth="xl"
+              maxWidth="xxl"
               component="main"
               sx={{ pt: 0, pb: 3, mt: 1 }}
             >

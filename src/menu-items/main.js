@@ -15,6 +15,7 @@ import {
   Computer,
   Money,
   Dashboard,
+  Feed,
 } from "@mui/icons-material";
 
 const main_items = {
@@ -102,6 +103,13 @@ const main_items = {
           icon: Computer,
         },
       ],
+    },
+    {
+      id: "feeds",
+      title: <FormattedMessage id="feeds" />,
+      type: "item",
+      url: "/feeds",
+      icon: Feed,
     },
     {
       id: "pricing",

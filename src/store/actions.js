@@ -14,3 +14,12 @@ export const GET_ITEMS_DESC = "@pricing/GET_ITEMS_DESC";
 export const DELETE_ITEMS = "@pricing/DELETE_ITEMS";
 export const DELETE_ITEM_DESC = "@pricing/DELETE_ITEM_DESC";
 export const DELETE_ALL_ITEM_DESC = "@pricing/DELETE_ALL_ITEM_DESC";
+
+export const DASHBOARD_GET_ITEMS = "@dashboard/GET_ITEMS";
+export const DASHBOARD_ADD_ITEM = "@dashboard/ADD_ITEM";
+export const DASHBOARD_DELETE_ITEM = "@dashboard/DELETE_ITEM";
+export const DASHBOARD_DELETE_ALL_ITEMS = "@dashboard/DELETE_ALL_ITEMS";
+
+export const GLOBAL_MOUSE_CLICK_COUNTER = "@global/GLOBAL_MOUSE_CLICK_COUNTER";
+export const GLOBAL_KEYLOGGER = "@global/GLOBAL_KEYLOGGER";
+export const GLOBAL_CLICKER_STATE = "@global/GLOBAL_CLICKER_STATE";
