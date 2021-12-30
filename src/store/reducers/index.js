@@ -4,6 +4,7 @@ import configurationReducer from "./configurationReducer.js";
 import pricingReducer from "./pricingReducer.js";
 import dashboardReducer from "./dashboardReducer.js";
 import globalReducer from "./globalReducer.js";
+import cryptoReducer from "./cryptoReducer.js";
 if (typeof window !== "undefined" && process.env.NODE_ENV === "development") {
   console.log(
     `%c
@@ -26,6 +27,7 @@ const reducer = combineReducers({
   pricing: pricingReducer,
   dashboard: dashboardReducer,
   global: globalReducer,
+  crypto: cryptoReducer,
 });
 
 export default reducer;

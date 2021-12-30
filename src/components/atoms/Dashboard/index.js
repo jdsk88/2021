@@ -7,18 +7,27 @@ import Paper from "@mui/material/Paper";
 // import Chart from "./Chart";
 import Deposits from "./Deposits";
 import Orders from "./Orders";
-import { useMediaQuery } from "@mui/material";
+import { Button, useMediaQuery } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { useDispatch, useSelector } from "react-redux";
 import EventInfo from "./Click";
 import HLLineChart from "./LineHLC.js";
 import ApexChart from "./ApexChart";
-import { GLOBAL_CLICKER_STATE } from "store/actions";
+import {
+  CRYPTO_ALL,
+  CRYPTO_CODES,
+  CRYPTO_WIDGETDATA,
+  GLOBAL_CLICKER_STATE,
+} from "store/actions";
 import dataa from "store/data/charts/AreaChart";
+import getAllCryptoData from "services/Language/api/crypto";
+import CryptoServices from "services/Language/api/crypto";
 function DashboardContent() {
   const mdTheme = createTheme();
   const dispatch = useDispatch();
   const charts = useSelector((state) => state.dashboard.charts);
+  const cryptocharts = useSelector((state) => state.crypto.widgets);
+  console.log(cryptocharts);
   const clicks = useSelector((state) => state.global.clicks);
   let clxarr = [];
   clicks.forEach((click, i) => {
@@ -177,12 +186,61 @@ function DashboardContent() {
       ],
     },
   ];
+  const crypto = {
+    height: 224,
+    type: "bar",
+    options: {
+      chart: {
+        id: "crypto-chart",
+        sparkline: {
+          enabled: true,
+        },
+      },
+      plotOptions: {
+        bar: {
+          columnWidth: "55%",
+          distributed: true,
+        },
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      stroke: {
+        width: 0,
+      },
+      xaxis: {
+        categories: cryptocharts.length > 0 ? cryptocharts[0].exchange : null,
+      },
+    },
+    series: [
+      {
+        name: cryptocharts.length > 0 ? cryptocharts[0].symbol : null,
+        data: cryptocharts.length > 0 ? cryptocharts[0].current : null,
+      },
+    ],
+  };
+  console.log(crypto);
   React.useEffect(() => {
     dispatch({ type: GLOBAL_CLICKER_STATE });
+    dispatch({ type: CRYPTO_WIDGETDATA });
+    dispatch({ type: CRYPTO_ALL });
   }, [dispatch]);
   return (
     <>
-      {data.map((chart, i) => (
+      <Button onClick={() => CryptoServices.getWidgetData(dispatch, "btc")}>
+        get crypto widget
+      </Button>
+      <Button
+        onClick={() => {
+          CryptoServices.getAllData(dispatch);
+          dispatch({ type: CRYPTO_ALL });
+        }}
+      >
+        get crypto data
+      </Button>
+      {cryptocharts.length < 1 ? <></> : <ApexChart data={crypto} />}
+
+      {/* {data.map((chart, i) => (
         <Grid item xs={12} md={6} lg={6}>
           <Paper
             sx={{
@@ -195,7 +253,7 @@ function DashboardContent() {
           </Paper>
         </Grid>
       ))}
-      {clicks.at(-1) ? <EventInfo data={clicks.at(-1)} /> : <></>}
+      {clicks.at(-1) ? <EventInfo data={clicks.at(-1)} /> : <></>} */}
     </>
   );
 }

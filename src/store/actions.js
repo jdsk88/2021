@@ -23,3 +23,11 @@ export const DASHBOARD_DELETE_ALL_ITEMS = "@dashboard/DELETE_ALL_ITEMS";
 export const GLOBAL_MOUSE_CLICK_COUNTER = "@global/GLOBAL_MOUSE_CLICK_COUNTER";
 export const GLOBAL_KEYLOGGER = "@global/GLOBAL_KEYLOGGER";
 export const GLOBAL_CLICKER_STATE = "@global/GLOBAL_CLICKER_STATE";
+
+export const CRYPTO_CODES = "@crypto/currencies";
+export const CRYPTO_ADD = "@crypto/currencies/add";
+export const CRYPTO_ALL = "@crypto/currencies/all";
+export const CRYPTO_CURRENCY = "@crypto/currencies/:currency";
+export const CRYPTO_WIDGETDATA = "@crypto/currencies/widgetdata/:currency";
+export const CRYPTO_WIDGETDATA_SET = "@crypto/currencies/CRYPTO_WIDGETDATA_SET";
+export const CRYPTO_ERROR = "@crypto/error";
