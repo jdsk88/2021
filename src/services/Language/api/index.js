@@ -1,5 +1,5 @@
 import axios from "axios";
-const url = "https://192.168.0.24:443/api";
+const url = "https://85.222.120.170/api";
 const api = axios.create({
   baseURL: url,
 });
