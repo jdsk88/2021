@@ -5,8 +5,9 @@ import LayoutMain from "layouts/Main";
 const Pricing = Lazy(lazy(() => import("views/pages/Pricing")));
 const Contact = Lazy(lazy(() => import("views/pages/Contact")));
 const Dashboard = Lazy(lazy(() => import("views/pages/Dashboard")));
-const Crypto = Lazy(lazy(() => import("views/crypto/table")));
+const Crypto = Lazy(lazy(() => import("views/crypto")));
 const CryptoCoinPage = Lazy(lazy(() => import("views/crypto/coin")));
+const CryptoTable = Lazy(lazy(() => import("views/crypto/table")));
 const UserProfile = Lazy(lazy(() => import("views/pages/UserProfile")));
 const Feeds = Lazy(lazy(() => import("views/pages/Feeds")));
 
@@ -68,16 +69,16 @@ const Main = {
     },
     // {
     //   path: "/dashboard/cryptocurrecy",
-    //   element: <Crypto />,
-    // },
-    // {
-    //   path: "/dashboard/cryptocurrecy/table",
-    //   element: <Crypto />,
-    // },
-    // {
-    //   path: "/dashboard/cryptocurrecy/item",
     //   element: <CryptoCoinPage />,
     // },
+    {
+      path: "/dashboard/cryptocurrecy/table",
+      element: <CryptoTable />,
+    },
+    {
+      path: "/dashboard/cryptocurrecy/item",
+      element: <CryptoCoinPage />,
+    },
     // {
     //   path: "/dashboard/business",
     //   element: <Dashboard />,

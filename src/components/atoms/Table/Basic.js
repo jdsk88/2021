@@ -6,50 +6,28 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Typography } from "@mui/material";
 
 export default function BasicTable({ data, name }) {
   const cryptocurrencies = useSelector((state) => state.crypto.data);
-
-  function createData(
-    name,
-    LastPrice,
-    prc,
-    Symbol,
-    dayHigh,
-    dayLow,
-    dayPriceChart,
-    Coins,
-    MarketCup
-  ) {
-    return {
-      name,
-      LastPrice,
-      prc,
-      Symbol,
-      dayHigh,
-      dayLow,
-      dayPriceChart,
-      Coins,
-      MarketCup,
-    };
-  }
   let rows = [];
-  cryptocurrencies[0].forEach((element, i) => {
-    rows.push({
-      name: element.name.name,
-      image: element.name.image.small,
-      LastPrice: element.marketData.current_price.usd,
-      prc: element.marketData.price_change_percentage_24h,
-      Symbol: element.name.symbol,
-      dayHigh: element.marketData.high_24h.usd,
-      dayLow: element.marketData.low_24h.usd,
-      dayPriceChart: element.marketData.market_cap_change_24h_in_currency.usd,
-      Coins: element.marketData.total_supply,
-      MarketCup: element.marketData.total_volume.usd,
+  if (cryptocurrencies[0].length > 1) {
+    cryptocurrencies[0].forEach((element, i) => {
+      rows.push({
+        name: element.name.name,
+        image: element.name.image.small,
+        LastPrice: element.marketData.current_price.usd,
+        prc: element.marketData.price_change_percentage_24h,
+        Symbol: element.name.symbol,
+        dayHigh: element.marketData.high_24h.usd,
+        dayLow: element.marketData.low_24h.usd,
+        dayPriceChart: element.marketData.market_cap_change_24h_in_currency.usd,
+        Coins: element.marketData.total_supply,
+        MarketCup: element.marketData.total_volume.usd,
+      });
     });
-  });
+  }
 
   return (
     <TableContainer component={Paper}>

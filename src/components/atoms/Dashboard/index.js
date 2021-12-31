@@ -16,7 +16,7 @@ import {
   CRYPTO_WIDGETDATA,
   GLOBAL_CLICKER_STATE,
 } from "store/actions";
-import CryptoServices from "services/Language/api/crypto";
+import CryptoServices from "services/api/crypto";
 import BasicTable from "../Table/Basic";
 function DashboardContent() {
   const dispatch = useDispatch();
