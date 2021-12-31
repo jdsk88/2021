@@ -18,6 +18,9 @@ import {
   Feed,
   CurrencyPoundTwoTone,
   BusinessCenter,
+  CurrencyExchange,
+  TableRows,
+  TableChart,
 } from "@mui/icons-material";
 
 const main_items = {
@@ -28,44 +31,29 @@ const main_items = {
     {
       id: "dashboard",
       title: <FormattedMessage id="dashboard" />,
-      type: "collapse",
+      type: "item",
       icon: Dashboard,
+      url: "/dashboard",
+    },
+    {
+      id: "crypto",
+      title: <FormattedMessage id="cryptocurrecy" />,
+      type: "collapse",
+      icon: CurrencyExchange,
       children: [
         {
-          id: "aboutme",
-          title: <FormattedMessage id="dashboard" />,
+          id: "crypto_table",
+          title: <FormattedMessage id="cryptocurrecy_table" />,
           type: "item",
-          url: "/dashboard",
-          icon: Dashboard,
+          url: "/dashboard/cryptocurrecy/table",
+          icon: TableRows,
         },
         {
-          id: "soft",
-          title: <FormattedMessage id="cryptocurrecy" />,
-          type: "collapse",
-          icon: CurrencyPoundTwoTone,
-          children: [
-            {
-              id: "soft",
-              title: <FormattedMessage id="cryptocurrecy_table" />,
-              type: "item",
-              url: "/dashboard/cryptocurrecy/table",
-              icon: CurrencyPoundTwoTone,
-            },
-            {
-              id: "soft",
-              title: <FormattedMessage id="cryptocurrecy_item" />,
-              type: "item",
-              url: "/dashboard/cryptocurrecy/item",
-              icon: CurrencyPoundTwoTone,
-            },
-          ],
-        },
-        {
-          id: "hard",
-          title: <FormattedMessage id="business" />,
+          id: "crypto_coin",
+          title: <FormattedMessage id="cryptocurrecy_item" />,
           type: "item",
-          url: "/dashboard/business",
-          icon: BusinessCenter,
+          url: "/dashboard/cryptocurrecy/item",
+          icon: TableChart,
         },
       ],
     },

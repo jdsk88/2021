@@ -9,11 +9,13 @@ export default function IconBreadcrumbs({ url }) {
   const str = url.replace(/\/+/g, " ");
   const split = str.split(" ").map((name) => name);
   let items = [];
-  split.forEach((element) => {
-    if (element !== "") {
-      items.push(element);
-    }
-  });
+  // React.useEffect(() => {
+    split.forEach((element) => {
+      if (element !== "") {
+        items.push(element);
+      }
+    });
+  // });
 
   return (
     <Grid

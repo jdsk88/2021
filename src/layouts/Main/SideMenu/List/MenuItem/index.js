@@ -60,7 +60,7 @@ const MenuItem = ({ item, level }) => {
       .toString()
       .split("/")
       .findIndex((id) => id === item.id);
-    if (currentIndex > -1) {
+    if (currentIndex) {
       dispatch({ type: MENU_OPEN, id: item.id });
     }
   }, [dispatch,item.id]);
