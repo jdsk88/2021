@@ -16,6 +16,8 @@ import {
   Money,
   Dashboard,
   Feed,
+  CurrencyPoundTwoTone,
+  BusinessCenter,
 } from "@mui/icons-material";
 
 const main_items = {
@@ -26,9 +28,46 @@ const main_items = {
     {
       id: "dashboard",
       title: <FormattedMessage id="dashboard" />,
-      type: "item",
-      url: "/dashboard",
+      type: "collapse",
       icon: Dashboard,
+      children: [
+        {
+          id: "aboutme",
+          title: <FormattedMessage id="dashboard" />,
+          type: "item",
+          url: "/dashboard",
+          icon: Dashboard,
+        },
+        {
+          id: "soft",
+          title: <FormattedMessage id="cryptocurrecy" />,
+          type: "collapse",
+          icon: CurrencyPoundTwoTone,
+          children: [
+            {
+              id: "soft",
+              title: <FormattedMessage id="cryptocurrecy_table" />,
+              type: "item",
+              url: "/dashboard/cryptocurrecy/table",
+              icon: CurrencyPoundTwoTone,
+            },
+            {
+              id: "soft",
+              title: <FormattedMessage id="cryptocurrecy_item" />,
+              type: "item",
+              url: "/dashboard/cryptocurrecy/item",
+              icon: CurrencyPoundTwoTone,
+            },
+          ],
+        },
+        {
+          id: "hard",
+          title: <FormattedMessage id="business" />,
+          type: "item",
+          url: "/dashboard/business",
+          icon: BusinessCenter,
+        },
+      ],
     },
     {
       id: "aboutme",

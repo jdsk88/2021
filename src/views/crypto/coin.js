@@ -1,31 +1,20 @@
 import * as React from "react";
-import { createTheme } from "@mui/material/styles";
-
 import Grid from "@mui/material/Grid";
-
 import { Card, FormControl, NativeSelect, Typography } from "@mui/material";
-import { useTheme } from "@mui/material/styles";
 import { useDispatch, useSelector } from "react-redux";
-import EventInfo from "./Click";
-import HLLineChart from "./LineHLC.js";
-import ApexChart from "./ApexChart";
+import ApexChart from "components/atoms/Dashboard/ApexChart";
 import {
-  CRYPTO_ALL,
   CRYPTO_CODES,
   CRYPTO_CODES_GET,
   CRYPTO_WIDGETDATA,
   GLOBAL_CLICKER_STATE,
 } from "store/actions";
 import CryptoServices from "services/Language/api/crypto";
-import BasicTable from "../Table/Basic";
-function DashboardContent() {
+function CoinContent() {
   const dispatch = useDispatch();
 
   const cryptocharts = useSelector((state) => state.crypto.widgets);
-  const cryptocurrencies = useSelector((state) => state.crypto.data);
   const crypto_symbols = useSelector((state) => state.crypto.symbols);
-  const line_chart = useSelector((state) => state.crypto.lineChart);
-  console.log(line_chart[0]);
   const clicks = useSelector((state) => state.global.clicks);
   let clxarr = [];
   clicks.forEach((click, i) => {
@@ -40,149 +29,6 @@ function DashboardContent() {
     yarr.push(click.clientY);
   });
 
-  const data = [
-    {
-      type: "bar",
-      height: 260,
-      options: {
-        chart: {
-          id: "new-stack-chart",
-          sparkline: {
-            enabled: true,
-          },
-        },
-        dataLabels: {
-          enabled: false,
-        },
-        plotOptions: {
-          bar: {
-            columnWidth: "80%",
-          },
-        },
-        xaxis: {
-          crosshairs: {
-            width: 1,
-          },
-        },
-        tooltip: {
-          fixed: {
-            enabled: true,
-          },
-          x: {
-            show: false,
-          },
-          y: {
-            title: "Stock - ",
-          },
-          marker: {
-            show: false,
-          },
-        },
-      },
-      series: [
-        { name: "1", data: clxarr },
-        { name: "2", data: clxarr },
-      ],
-    },
-    {
-      type: "bar",
-      height: 260,
-      options: {
-        chart: {
-          id: "new-stack-chart",
-          sparkline: {
-            enabled: true,
-          },
-        },
-        dataLabels: {
-          enabled: false,
-        },
-        plotOptions: {
-          bar: {
-            columnWidth: "80%",
-          },
-        },
-        xaxis: {
-          crosshairs: {
-            width: 1,
-          },
-        },
-        tooltip: {
-          fixed: {
-            enabled: false,
-          },
-          x: {
-            show: false,
-          },
-          y: {
-            title: "Stock - ",
-          },
-          marker: {
-            show: false,
-          },
-        },
-      },
-      series: [
-        {
-          data: [66, 41, 89, 63, 25, 44, 12, 36, 9, 54],
-        },
-      ],
-    },
-    {
-      height: 600,
-      type: "area",
-      options: {
-        chart: {
-          id: "market-sale-chart",
-          toolbar: {
-            show: true,
-          },
-          zoom: {
-            enabled: true,
-          },
-          sparkline: {
-            enabled: true,
-          },
-        },
-        dataLabels: {
-          enabled: true,
-        },
-        stroke: {
-          curve: "smooth",
-          width: 2,
-        },
-        fill: {
-          type: "gradient",
-          gradient: {
-            shadeIntensity: 1,
-            opacityFrom: 0.5,
-            opacityTo: 0,
-            stops: [0, 80, 100],
-          },
-        },
-        legend: {
-          show: true,
-        },
-        yaxis: {
-          min: 1,
-          max: 1000000,
-          labels: {
-            show: false,
-          },
-        },
-      },
-      series: [
-        {
-          name: "clientX",
-          data: xarr,
-        },
-        {
-          name: "clientY",
-          data: yarr,
-        },
-      ],
-    },
-  ];
   const crypto = {
     height: 400,
     type: "bar",
@@ -214,29 +60,6 @@ function DashboardContent() {
     series: [
       {
         // name: cryptocharts.length > 0 ? cryptocharts[0].symbol : null,
-        data: cryptocharts.length > 0 ? cryptocharts[0].current : null,
-      },
-    ],
-  };
-  const timeline = {
-    type: "bar",
-    height: 600,
-    options: {
-      plotOptions: {
-        bar: {
-          borderRadius: 4,
-          horizontal: false,
-        },
-      },
-      dataLabels: {
-        enabled: false,
-      },
-      xaxis: {
-        categories: cryptocharts.length > 0 ? cryptocharts[0].exchange : null,
-      },
-    },
-    series: [
-      {
         data: cryptocharts.length > 0 ? cryptocharts[0].current : null,
       },
     ],
@@ -344,83 +167,19 @@ function DashboardContent() {
     ],
   };
 
-  var options2 = {
-    type: "line",
-    series: [
-      {
-        name: "Desktops",
-        data: [10, 41, 35, 51, 49, 62, 69, 91, 148],
-      },
-    ],
-    chart: {
-      height: 350,
-      type: "line",
-      zoom: {
-        enabled: true,
-      },
-    },
-    dataLabels: {
-      enabled: false,
-    },
-    stroke: {
-      curve: "straight",
-    },
-    title: {
-      text: "Product Trends by Month",
-      align: "left",
-    },
-    grid: {
-      row: {
-        colors: ["#f3f3f3", "transparent"], // takes an array which will be repeated on columns
-        opacity: 0.5,
-      },
-    },
-    xaxis: {
-      categories: [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-      ],
-    },
-  };
   const handleNativeSelect = (value) => {
     CryptoServices.getWidgetData(dispatch, value);
   };
   React.useEffect(() => {
-    CryptoServices.getAllData(dispatch);
     CryptoServices.getSymbols(dispatch);
     CryptoServices.getLineChartData(dispatch);
     dispatch({ type: CRYPTO_CODES });
     dispatch({ type: CRYPTO_CODES_GET });
     dispatch({ type: GLOBAL_CLICKER_STATE });
     dispatch({ type: CRYPTO_WIDGETDATA });
-    dispatch({ type: CRYPTO_ALL });
   }, [dispatch]);
   return (
     <>
-     <Grid item xs={12} sm={12} md={12} xl={12}>
-        <Card>
-          <Typography textAlign="center" variant="h6">
-            
-          </Typography>
-        </Card>
-      </Grid>
-      <Grid item xs={12} sm={12} md={12} xl={12}>
-        {cryptocurrencies.length < 1 ? (
-          <></>
-        ) : (
-          <Card>
-            <BasicTable name={"Currency"} />
-          </Card>
-        )}
-      </Grid>
-
       <Grid item xs={12} sm={12} md={12} xl={12}>
         <Card>
           <Typography textAlign="center" variant="h6">
@@ -524,6 +283,6 @@ function DashboardContent() {
   );
 }
 
-export default function Dashboard() {
-  return <DashboardContent />;
+export default function CryptoCoin() {
+  return <CoinContent />;
 }
