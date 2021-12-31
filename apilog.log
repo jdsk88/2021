@@ -1,0 +1,12 @@
+::ffff:192.168.0.17 - - [30/Dec/2021:23:01:04 +0000] "GET /api/crypto/currencies HTTP/1.1" 200 327
+::ffff:192.168.0.17 - - [30/Dec/2021:23:01:04 +0000] "GET /api/crypto/currencies/widgetdata/lineChart HTTP/1.1" 200 2619
+::ffff:192.168.0.17 - - [30/Dec/2021:23:01:05 +0000] "GET /api/crypto/currencies HTTP/1.1" 200 327
+::ffff:192.168.0.17 - - [30/Dec/2021:23:01:05 +0000] "GET /api/crypto/currencies/widgetdata/lineChart HTTP/1.1" 200 2619
+::ffff:192.168.0.17 - - [30/Dec/2021:23:02:35 +0000] "GET /api/crypto/currencies HTTP/1.1" 200 327
+::ffff:192.168.0.17 - - [30/Dec/2021:23:02:35 +0000] "GET /api/crypto/currencies/widgetdata/lineChart HTTP/1.1" 200 2619
+GET ::ffff:192.168.0.17 /api/crypto/currencies 200 327 3.502 ms  [30/Dec/2021:23:03:12 +0000]
+GET ::ffff:192.168.0.17 /api/crypto/currencies/widgetdata/lineChart 200 2607 0.884 ms  [30/Dec/2021:23:03:12 +0000]
+GET ::ffff:192.168.0.17 /api/crypto/currencies 200 327 1.247 ms  [30/Dec/2021:23:03:15 +0000]
+GET ::ffff:192.168.0.17 /api/crypto/currencies/widgetdata/lineChart 200 2607 1.523 ms  [30/Dec/2021:23:03:15 +0000]
+GET ::ffff:192.168.0.17 /api/crypto/currencies 200 327 1.170 ms  [30/Dec/2021:23:03:19 +0000]
+GET ::ffff:192.168.0.17 /api/crypto/currencies/widgetdata/lineChart 200 2607 1.126 ms  [30/Dec/2021:23:03:19 +0000]

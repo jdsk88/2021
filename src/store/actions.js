@@ -32,3 +32,5 @@ export const CRYPTO_CURRENCY = "@crypto/currencies/:currency";
 export const CRYPTO_WIDGETDATA = "@crypto/currencies/widgetdata/:currency";
 export const CRYPTO_WIDGETDATA_SET = "@crypto/currencies/CRYPTO_WIDGETDATA_SET";
 export const CRYPTO_ERROR = "@crypto/error";
+export const CRYPTO_LINECHART_SET = "@crypto/line_chart_set";
+export const CRYPTO_LINECHART_GET = "@crypto/line_chart_get";

@@ -7,7 +7,14 @@ import Paper from "@mui/material/Paper";
 // import Chart from "./Chart";
 import Deposits from "./Deposits";
 import Orders from "./Orders";
-import { Button, NativeSelect, useMediaQuery } from "@mui/material";
+import {
+  Button,
+  Card,
+  FormControl,
+  NativeSelect,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import { useDispatch, useSelector } from "react-redux";
 import EventInfo from "./Click";
@@ -30,7 +37,8 @@ function DashboardContent() {
   const cryptocharts = useSelector((state) => state.crypto.widgets);
   const cryptocurrencies = useSelector((state) => state.crypto.data);
   const crypto_symbols = useSelector((state) => state.crypto.symbols);
-  console.log(crypto_symbols);
+  const line_chart = useSelector((state) => state.crypto.lineChart);
+  console.log(line_chart[0]);
   const clicks = useSelector((state) => state.global.clicks);
   let clxarr = [];
   clicks.forEach((click, i) => {
@@ -190,20 +198,18 @@ function DashboardContent() {
     },
   ];
   const crypto = {
-    height: 350,
+    height: 400,
     type: "bar",
     options: {
       chart: {
         id: "crypto-chart",
-        stacked: true,
-        // stackType: "100%",
-        sparkline: {
+        // stacked: true,
+        zoom: {
           enabled: true,
         },
       },
       plotOptions: {
         bar: {
-          // columnWidth: "100%",
           distributed: true,
           horizontal: false,
         },
@@ -211,8 +217,9 @@ function DashboardContent() {
       dataLabels: {
         enabled: false,
       },
+
       stroke: {
-        width: 1,
+        width: 2,
       },
       xaxis: {
         categories: cryptocharts.length > 0 ? cryptocharts[0].exchange : null,
@@ -220,14 +227,37 @@ function DashboardContent() {
     },
     series: [
       {
-        name: cryptocharts.length > 0 ? cryptocharts[0].symbol : null,
+        // name: cryptocharts.length > 0 ? cryptocharts[0].symbol : null,
+        data: cryptocharts.length > 0 ? cryptocharts[0].current : null,
+      },
+    ],
+  };
+  const timeline = {
+    type: "bar",
+    height: 600,
+    options: {
+      plotOptions: {
+        bar: {
+          borderRadius: 4,
+          horizontal: false,
+        },
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      xaxis: {
+        categories: cryptocharts.length > 0 ? cryptocharts[0].exchange : null,
+      },
+    },
+    series: [
+      {
         data: cryptocharts.length > 0 ? cryptocharts[0].current : null,
       },
     ],
   };
 
-  const line = {
-    height: 600,
+  var options = {
+    height: 400,
     type: "area",
     options: {
       chart: {
@@ -239,11 +269,11 @@ function DashboardContent() {
           enabled: true,
         },
         sparkline: {
-          enabled: true,
+          enabled: false,
         },
       },
       dataLabels: {
-        enabled: true,
+        enabled: false,
       },
       stroke: {
         curve: "smooth",
@@ -255,15 +285,15 @@ function DashboardContent() {
           shadeIntensity: 1,
           opacityFrom: 0.5,
           opacityTo: 0,
-          stops: [0, 80, 100],
+          stops: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
         },
       },
       legend: {
-        show: true,
+        show: false,
       },
       yaxis: {
         min: 1,
-        max: 1000000,
+        max: 100,
         labels: {
           show: false,
         },
@@ -271,20 +301,114 @@ function DashboardContent() {
     },
     series: [
       {
-        name: "clientX",
-        data: xarr,
-      },
-      {
-        name: "clientY",
-        data: yarr,
+        name: cryptocharts[0] ? cryptocharts[0].name : null,
+        data: cryptocharts.length > 0 ? cryptocharts[0].current : null,
       },
     ],
+  };
+
+  var optionsbig = {
+    height: window.innerHeight - 165,
+    type: "area",
+    options: {
+      chart: {
+        id: "market-sale-chart",
+        toolbar: {
+          show: true,
+        },
+        zoom: {
+          enabled: true,
+        },
+        sparkline: {
+          enabled: false,
+        },
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      stroke: {
+        curve: "smooth",
+        width: 2,
+      },
+      fill: {
+        type: "gradient",
+        gradient: {
+          shadeIntensity: 1,
+          opacityFrom: 0.5,
+          opacityTo: 0,
+          stops: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+        },
+      },
+      legend: {
+        show: false,
+      },
+      yaxis: {
+        min: 1,
+        max: 100,
+        labels: {
+          show: false,
+        },
+      },
+    },
+    series: [
+      {
+        name: cryptocharts[0] ? cryptocharts[0].name : null,
+        data: cryptocharts.length > 0 ? cryptocharts[0].current : null,
+      },
+    ],
+  };
+
+  var options2 = {
+    type: "line",
+    series: [
+      {
+        name: "Desktops",
+        data: [10, 41, 35, 51, 49, 62, 69, 91, 148],
+      },
+    ],
+    chart: {
+      height: 350,
+      type: "line",
+      zoom: {
+        enabled: true,
+      },
+    },
+    dataLabels: {
+      enabled: false,
+    },
+    stroke: {
+      curve: "straight",
+    },
+    title: {
+      text: "Product Trends by Month",
+      align: "left",
+    },
+    grid: {
+      row: {
+        colors: ["#f3f3f3", "transparent"], // takes an array which will be repeated on columns
+        opacity: 0.5,
+      },
+    },
+    xaxis: {
+      categories: [
+        "Jan",
+        "Feb",
+        "Mar",
+        "Apr",
+        "May",
+        "Jun",
+        "Jul",
+        "Aug",
+        "Sep",
+      ],
+    },
   };
   const handleNativeSelect = (value) => {
     CryptoServices.getWidgetData(dispatch, value);
   };
   React.useEffect(() => {
     CryptoServices.getSymbols(dispatch);
+    CryptoServices.getLineChartData(dispatch);
     dispatch({ type: CRYPTO_CODES });
     dispatch({ type: CRYPTO_CODES_GET });
     dispatch({ type: GLOBAL_CLICKER_STATE });
@@ -293,20 +417,114 @@ function DashboardContent() {
   }, [dispatch]);
   return (
     <>
-      <Grid item xs={12} sm={12} md={12}>
-        <NativeSelect
-          fullWidth
-          onChange={(e) => handleNativeSelect(e.currentTarget.value)}
-        >
-          <option disabled value={"btc"}>
-            Choose cryptocurrency (default: btc)
-          </option>
-          {crypto_symbols[1] &&
-            crypto_symbols[1].map((symbol) => (
-              <option value={symbol}>{symbol}</option>
-            ))}
-        </NativeSelect>
-        {cryptocharts.length < 1 ? <></> : <ApexChart data={crypto} />}
+      <Grid item xs={12} sm={12} md={12} xl={12}>
+        <Card>
+          <Typography textAlign="center" variant="h6">
+            Choose cryptocurrency
+          </Typography>
+        </Card>
+      </Grid>
+      <Grid
+        item
+        xs={12}
+        sm={12}
+        md={12}
+        xl={12}
+        sx={{
+          mt: 1,
+          position: "sticky",
+          top: 30,
+          zIndex: 1030,
+          background: "white",
+        }}
+      >
+        <FormControl fullWidth>
+          <NativeSelect
+            variant="filled"
+            fullWidth
+            onChange={(e) => handleNativeSelect(e.currentTarget.value)}
+          >
+            <option disabled value={"btc"}>
+              Choose cryptocurrency (default: btc)
+            </option>
+            {crypto_symbols[0] &&
+              crypto_symbols[0].map((symbol) => (
+                <option value={symbol}>{symbol}</option>
+              ))}
+          </NativeSelect>
+        </FormControl>
+      </Grid>
+      {/* <Grid item xs={12} sm={12} md={12} xl={12}>
+        {cryptocharts.length < 1 ? (
+          <></>
+        ) : (
+          <Card>
+            <Typography>{cryptocharts[0].name}</Typography>
+            <Typography>{cryptocharts[0].price.usd.toFixed(16)}</Typography>
+          </Card>
+        )}
+      </Grid> */}
+
+      <Grid item xs={12} sm={12} md={2} xl={2}>
+        <Grid item xs={12} sm={12} md={12} xl={12}>
+          {cryptocharts.length < 1 ? (
+            <></>
+          ) : (
+            <Card>
+              <Typography>{cryptocharts[0].name}</Typography>
+            </Card>
+          )}
+        </Grid>
+        <Grid item xs={12} sm={12} md={12} xl={12}>
+          {cryptocharts.length < 1 ? (
+            <></>
+          ) : (
+            <>
+              <ApexChart data={options} />
+            </>
+          )}
+        </Grid>
+      </Grid>
+
+      <Grid item xs={12} sm={12} md={10} xl={10}>
+        <Grid item xs={12} sm={12} md={12} xl={12}>
+          {cryptocharts.length < 1 ? (
+            <></>
+          ) : (
+            <Card>
+              <Typography>{cryptocharts[0].name}</Typography>
+            </Card>
+          )}
+        </Grid>
+        <Grid item xs={12} sm={12} md={12} xl={12}>
+          {cryptocharts.length < 1 ? (
+            <></>
+          ) : (
+            <>
+              <ApexChart data={crypto} />
+            </>
+          )}
+        </Grid>
+      </Grid>
+      <Grid item xs={12} sm={12} md={12} xl={12}>
+        <Grid item xs={12} sm={12} md={12} xl={12}>
+          {cryptocharts.length < 1 ? (
+            <></>
+          ) : (
+            <Card>
+              <Typography>{cryptocharts[0].name}</Typography>
+            </Card>
+          )}
+        </Grid>
+      <Grid item xs={12} sm={12} md={12} xl={12}>
+        {cryptocharts.length < 1 ? (
+          <></>
+        ) : (
+          <>
+            <ApexChart data={optionsbig} />
+          </>
+        )}
+      </Grid>
       </Grid>
     </>
   );

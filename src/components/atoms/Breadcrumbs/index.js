@@ -16,7 +16,14 @@ export default function IconBreadcrumbs({ url }) {
   });
 
   return (
-    <Grid item xs={12} sm={12} md={12} height={75}>
+    <Grid
+      item
+      xs={12}
+      sm={12}
+      md={12}
+      height={25}
+      sx={{ position: "sticky", top: -5, zIndex: 1031 }}
+    >
       <Card
         sx={{
           height: "100%",
@@ -25,26 +32,27 @@ export default function IconBreadcrumbs({ url }) {
           flexDirection: "row",
           justifyContent: "start",
           alignItems: "center",
-          padding: 2.5,
+          padding: 1.5,
+          border: "1px solid silver",
+          boxSizing: "border-box",
         }}
       >
         <Breadcrumbs
           separator="›"
-          sx={{ fontSize: 25 }}
+          sx={{ fontSize: 12.5 }}
           aria-label="breadcrumb"
         >
-          <Typography variant="h5" sx={{ fontSize: 25 }}>
-            {/* <HomeIcon sx={{ fontSize: 25 }} /> */}
+          <Typography sx={{ fontSize: 12.5 }}>
+            {/* <HomeIcon sx={{ fontSize: 12.5}} /> */}
             <FormattedMessage id="breadcrumb_home" />
           </Typography>
           {items &&
             items.map((item, i) => (
               <Typography
                 key={"breadcrumbs" + item + i}
-                variant="h5"
-                sx={{ fontSize: 25 }}
+                sx={{ fontSize: 12.5 }}
               >
-                {/* <HomeIcon sx={{ fontSize: 25 }} /> */}
+                {/* <HomeIcon sx={{ fontSize: 12.5}} /> */}
                 <FormattedMessage id={item} />
               </Typography>
             ))}

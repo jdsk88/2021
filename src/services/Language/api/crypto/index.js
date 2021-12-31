@@ -2,6 +2,7 @@ import {
   CRYPTO_ADD,
   CRYPTO_CODES,
   CRYPTO_ERROR,
+  CRYPTO_LINECHART_SET,
   CRYPTO_WIDGETDATA_SET,
 } from "store/actions";
 import api from "../index";
@@ -25,6 +26,13 @@ const CryptoServices = {
     const res = await api.get(`/crypto/currencies`);
     return dispatch({
       type: CRYPTO_CODES,
+      payload: res.data,
+    });
+  },
+  getLineChartData: async (dispatch) => {
+    const res = await api.get(`/crypto/currencies/widgetdata/lineChart`);
+    return dispatch({
+      type: CRYPTO_LINECHART_SET,
       payload: res.data,
     });
   },
