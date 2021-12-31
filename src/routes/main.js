@@ -5,7 +5,7 @@ import LayoutMain from "layouts/Main";
 const Pricing = Lazy(lazy(() => import("views/pages/Pricing")));
 const Contact = Lazy(lazy(() => import("views/pages/Contact")));
 const Dashboard = Lazy(lazy(() => import("views/pages/Dashboard")));
-const Crypto = Lazy(lazy(() => import("views/crypto")));
+// const Crypto = Lazy(lazy(() => import("views/crypto")));
 const CryptoCoinPage = Lazy(lazy(() => import("views/crypto/coin")));
 const CryptoTable = Lazy(lazy(() => import("views/crypto/table")));
 const UserProfile = Lazy(lazy(() => import("views/pages/UserProfile")));

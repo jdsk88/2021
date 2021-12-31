@@ -34,6 +34,7 @@ const LayoutMain = () => {
   useEffect(() => {
     setURL(url);
   }, [url]);
+  
   useEffect(() => {
     dispatch({ type: GLOBAL_CLICKER_STATE });
   }, [url, dispatch]);

@@ -42,18 +42,18 @@ const main_items = {
       icon: CurrencyExchange,
       children: [
         {
-          id: "crypto_table",
-          title: <FormattedMessage id="cryptocurrecy_table" />,
-          type: "item",
-          url: "/dashboard/cryptocurrecy/table",
-          icon: TableRows,
-        },
-        {
           id: "crypto_coin",
           title: <FormattedMessage id="cryptocurrecy_item" />,
           type: "item",
           url: "/dashboard/cryptocurrecy/item",
           icon: TableChart,
+        },
+        {
+          id: "crypto_table",
+          title: <FormattedMessage id="cryptocurrecy_table" />,
+          type: "item",
+          url: "/dashboard/cryptocurrecy/table",
+          icon: TableRows,
         },
       ],
     },

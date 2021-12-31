@@ -15,19 +15,6 @@ function CoinContent() {
 
   const cryptocharts = useSelector((state) => state.crypto.widgets);
   const crypto_symbols = useSelector((state) => state.crypto.symbols);
-  const clicks = useSelector((state) => state.global.clicks);
-  let clxarr = [];
-  clicks.forEach((click, i) => {
-    clxarr.push(i);
-  });
-  let xarr = [];
-  clicks.forEach((click, i) => {
-    xarr.push(click.clientX);
-  });
-  let yarr = [];
-  clicks.forEach((click, i) => {
-    yarr.push(click.clientY);
-  });
 
   const crypto = {
     height: 400,
@@ -59,7 +46,6 @@ function CoinContent() {
     },
     series: [
       {
-        // name: cryptocharts.length > 0 ? cryptocharts[0].symbol : null,
         data: cryptocharts.length > 0 ? cryptocharts[0].current : null,
       },
     ],
@@ -172,7 +158,6 @@ function CoinContent() {
   };
   React.useEffect(() => {
     CryptoServices.getSymbols(dispatch);
-    CryptoServices.getLineChartData(dispatch);
     dispatch({ type: CRYPTO_CODES });
     dispatch({ type: CRYPTO_CODES_GET });
     dispatch({ type: GLOBAL_CLICKER_STATE });

@@ -6,16 +6,16 @@ import { Card, Grid } from "@mui/material";
 import { FormattedMessage } from "react-intl";
 
 export default function IconBreadcrumbs({ url }) {
-  const str = url.replace(/\/+/g, " ");
-  const split = str.split(" ").map((name) => name);
   let items = [];
   // React.useEffect(() => {
+    const str = url.replace(/\/+/g, " ");
+    const split = str.split(" ").map((name) => name);
     split.forEach((element) => {
       if (element !== "") {
         items.push(element);
       }
     });
-  // });
+  // }, [url]);
 
   return (
     <Grid
