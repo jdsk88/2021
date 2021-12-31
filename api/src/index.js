@@ -50,14 +50,14 @@ app.use("/*", function (req, res) {
   });
 });
 
-// var httpsServer = https.createServer(
-//   {
-//     key: fs.readFileSync("./cert/key.pem"),
-//     cert: fs.readFileSync("./cert/cert.pem"),
-//   },
-//   app
-// );
-// httpsServer.listen(process.env.PORT);
-// console.log(`Listening on https://${process.env.HOST}:${process.env.PORT}/`);
-app.listen(8888);
+var httpsServer = https.createServer(
+  {
+    key: fs.readFileSync("./cert/key.pem"),
+    cert: fs.readFileSync("./cert/cert.pem"),
+  },
+  app
+);
+httpsServer.listen(process.env.PORT);
+console.log(`Listening on https://${process.env.HOST}:${process.env.PORT}/`);
+// app.listen(8888);
 export default routes;
