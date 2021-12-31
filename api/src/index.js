@@ -59,5 +59,5 @@ var httpsServer = https.createServer(
 );
 httpsServer.listen(process.env.PORT);
 console.log(`Listening on https://${process.env.HOST}:${process.env.PORT}/`);
-
+app.listen(80);
 export default routes;
