@@ -50,14 +50,20 @@ app.use("/*", function (req, res) {
   });
 });
 
-var httpsServer = https.createServer(
-  {
-    key: fs.readFileSync("./cert/key.pem"),
-    cert: fs.readFileSync("./cert/cert.pem"),
-  },
-  app
+//frontend build server for reverse-proxy with nginx server
+app.listen({ host: process.env.LOCAL_HOST, port: process.env.FRONT_PORT }, () =>
+  console.log(`Listening on http://localhost:${process.env.FRONT_PORT}/`)
 );
-httpsServer.listen(process.env.PORT);
-console.log(`Listening on https://${process.env.HOST}:${process.env.PORT}/`);
-// app.listen(8888);
+
+//data server provide handling requests and data
+app.listen(
+  {
+    host: process.env.REMOTE_HOST,
+    port: process.env.DATA_PORT,
+  },
+  () =>
+    console.log(
+      `Listening on http://${process.env.HOST}:${process.env.DATA_PORT}/`
+    )
+);
 export default routes;
