@@ -9,6 +9,9 @@ import {
   CRYPTO_LINECHART_GET,
   CRYPTO_TABLE_GET,
   CRYPTO_TABLE_SET,
+  CRYPTO_ITEM_SET,
+  CRYPTO_ITEM_GET,
+  CRYPTO_ITEM_CLEAR,
 } from "../actions.js";
 
 export const initialState = {
@@ -17,28 +20,12 @@ export const initialState = {
   widgets: [],
   lineChart: [],
   table: [],
+  item: [],
 };
 
 const cryptoReducer = (state = initialState, action) => {
   let rows = [];
-  console.log(state.data);
-  // state.data[0].forEach((element, i) => {
-  //   rows.push({
-  //     name: element.name.name,
-  //     image: element.name.image.small,
-  //     LastPrice: element.marketData.current_price.usd,
-  //     prc: element.marketData.price_change_percentage_24h,
-  //     Symbol: element.name.symbol,
-  //     dayHigh: element.marketData.high_24h.usd,
-  //     dayLow: element.marketData.low_24h.usd,
-  //     dayPriceChart: element.marketData.market_cap_change_24h_in_currency.usd,
-  //     Coins: element.marketData.total_supply,
-  //     MarketCup: element.marketData.total_volume.usd,
-  //   });
-  // });
-  // state.table = rows;
-
-  console.log(state, action ? action : "NO ACTION YET");
+  console.log(state.item, action ? action : "NO ACTION YET");
   switch (action.type) {
     case CRYPTO_ADD:
       return { ...state, data: [action.payload] };
@@ -60,6 +47,15 @@ const cryptoReducer = (state = initialState, action) => {
       return { ...state, table: [action.payload] };
     case CRYPTO_TABLE_GET:
       return { ...state, table: [...state.table] };
+    case CRYPTO_ITEM_SET:
+      if (state.item.length > 1) {
+        state.item = [];
+      }
+      return { ...state, item: [action.payload] };
+    case CRYPTO_ITEM_GET:
+      return { ...state, item: [...state.item] };
+    case CRYPTO_ITEM_CLEAR:
+      return { ...state, item: [] };
     default:
       return state;
   }

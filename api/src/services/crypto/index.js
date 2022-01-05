@@ -13,6 +13,7 @@ const getCryptoData = async () => {
   return Crypto.find();
 };
 
+
 const createCryptoData = async ({
   symbol,
   name,

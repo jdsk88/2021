@@ -1,9 +1,10 @@
 import * as React from "react";
 import { DataGrid } from "@mui/x-data-grid";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+
 export default function DataTable() {
   const cryptocurrencies = useSelector((state) => state.crypto.data);
-
+  const dispatch = useDispatch();
   const columns = [
     { field: "id", headerName: "ID", width: 50 },
     { field: "image", headerName: "Logo", width: 100 },
@@ -42,6 +43,10 @@ export default function DataTable() {
         pageSize={50}
         rowsPerPageOptions={[50]}
         checkboxSelection
+        onCellClick={() => {
+          console.log("is here ?");
+          dispatch({ type: CRYPTO_ITEM_SET, payload: row.Symbol });
+        }}
       />
     </div>
   );

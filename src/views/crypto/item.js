@@ -8,13 +8,24 @@ import {
   CRYPTO_CODES_GET,
   CRYPTO_WIDGETDATA,
   GLOBAL_CLICKER_STATE,
+  CRYPTO_ITEM_GET,
+  CRYPTO_ITEM_CLEAR,
 } from "store/actions";
 import CryptoServices from "services/api/crypto";
-function CoinContent() {
+function CoinContentItem() {
   const dispatch = useDispatch();
-
+  React.useEffect(() => {
+    CryptoServices.getWidgetData(dispatch, item[0] || "btc");
+    CryptoServices.getSymbols(dispatch);
+    dispatch({ type: CRYPTO_CODES });
+    dispatch({ type: CRYPTO_CODES_GET });
+    dispatch({ type: GLOBAL_CLICKER_STATE });
+    dispatch({ type: CRYPTO_WIDGETDATA });
+    dispatch({ type: CRYPTO_ITEM_GET });
+  }, [dispatch]);
   const cryptocharts = useSelector((state) => state.crypto.widgets);
-  console.log(cryptocharts);
+  const item = useSelector((state) => state.crypto.item);
+
   const crypto_symbols = useSelector((state) => state.crypto.symbols);
 
   const crypto = {
@@ -155,15 +166,10 @@ function CoinContent() {
   };
 
   const handleNativeSelect = (value) => {
+    dispatch({ type: CRYPTO_ITEM_CLEAR });
     CryptoServices.getWidgetData(dispatch, value);
   };
-  React.useEffect(() => {
-    CryptoServices.getSymbols(dispatch);
-    dispatch({ type: CRYPTO_CODES });
-    dispatch({ type: CRYPTO_CODES_GET });
-    dispatch({ type: GLOBAL_CLICKER_STATE });
-    dispatch({ type: CRYPTO_WIDGETDATA });
-  }, [dispatch]);
+
   return (
     <>
       <Grid item xs={12} sm={12} md={12} xl={12}>
@@ -191,6 +197,7 @@ function CoinContent() {
           <NativeSelect
             variant="filled"
             fullWidth
+            value={item.length < 0 ? null : item[0]}
             onChange={(e) => handleNativeSelect(e.currentTarget.value)}
           >
             <option disabled value={"btc"}>
@@ -269,6 +276,6 @@ function CoinContent() {
   );
 }
 
-export default function CryptoCoin() {
-  return <CoinContent />;
+export default function CryptoCoinItem() {
+  return <CoinContentItem />;
 }

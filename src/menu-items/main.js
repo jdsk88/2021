@@ -28,19 +28,19 @@ const main_items = {
   type: "container",
   url: "/",
   children: [
-    {
-      id: "dashboard",
-      title: <FormattedMessage id="dashboard" />,
-      type: "item",
-      icon: Dashboard,
-      url: "/dashboard",
-    },
-    {
-      id: "crypto",
-      title: <FormattedMessage id="cryptocurrecy" />,
-      type: "collapse",
-      icon: CurrencyExchange,
-      children: [
+    // {
+    //   id: "dashboard",
+    //   title: <FormattedMessage id="dashboard" />,
+    //   type: "item",
+    //   icon: Dashboard,
+    //   url: "/dashboard",
+    // },
+    // {
+    //   id: "crypto",
+    //   title: <FormattedMessage id="cryptocurrecy" />,
+    //   type: "collapse",
+    //   icon: CurrencyExchange,
+    //   children: [
         {
           id: "crypto_coin",
           title: <FormattedMessage id="cryptocurrecy_item" />,
@@ -55,8 +55,8 @@ const main_items = {
           url: "/dashboard/cryptocurrecy/table",
           icon: TableRows,
         },
-      ],
-    },
+    //   ],
+    // },
     // {
     //   id: "aboutme",
     //   title: <FormattedMessage id="aboutme" />,

@@ -52,6 +52,8 @@ const MenuItem = ({ item, level }) => {
 
   const itemHandler = (id) => {
     dispatch({ type: MENU_OPEN, id });
+    console.log(id);
+
     if (matchesSM) dispatch({ type: SET_MENU_STATE, opened: false });
   };
 
@@ -63,7 +65,7 @@ const MenuItem = ({ item, level }) => {
     if (currentIndex) {
       dispatch({ type: MENU_OPEN, id: item.id });
     }
-  }, [dispatch,item.id]);
+  }, [dispatch, item.id]);
 
   return (
     <ListItemButton

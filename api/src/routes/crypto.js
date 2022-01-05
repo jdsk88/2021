@@ -35,6 +35,7 @@ routes.get("/database", async (req, res) => {
   const result = await CryptoServices.getCryptoData();
   res.send(result);
 });
+
 routes.get("/currencies", async (req, res) => {
   res.send(symbols);
 });

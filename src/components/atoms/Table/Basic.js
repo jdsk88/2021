@@ -6,10 +6,14 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import { useSelector } from "react-redux";
-import { Typography } from "@mui/material";
+import { useDispatch, useSelector } from "react-redux";
+import { Button, Typography } from "@mui/material";
+import { CRYPTO_CODES, CRYPTO_ITEM_SET } from "store/actions";
+import { Box } from "@mui/system";
+import { Link } from "react-router-dom";
 
 export default function BasicTable({ data, name }) {
+  const dispatch = useDispatch();
   const cryptocurrencies = useSelector((state) => state.crypto.data);
   let rows = [];
   if (cryptocurrencies[0].length > 1) {
@@ -44,6 +48,7 @@ export default function BasicTable({ data, name }) {
             <TableCell>24 Low</TableCell>
             <TableCell>Coins</TableCell>
             <TableCell>Market Cup</TableCell>
+            <TableCell>Charts</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -52,20 +57,25 @@ export default function BasicTable({ data, name }) {
               key={row.name}
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
-              <TableCell
-                component="th"
-                scope="row"
-                sx={{ display: "flex", justifyContent: "space-evenly" }}
-              >
-                <img
-                  src={row.image}
-                  style={{
-                    width: "30%",
-                    height: "25px",
-                    objectFit: "scale-down",
+              <TableCell>
+                <Box
+                  sx={{
+                    width: "100%",
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "space-between",
                   }}
-                />
-                <Typography sx={{ width: "70%" }}>{row.name}</Typography>
+                >
+                  <img
+                    src={row.image}
+                    style={{
+                      width: "30%",
+                      objectFit: "scale-down",
+                    }}
+                  />
+                  <Typography sx={{ width: "10%" }}>{"  "}</Typography>
+                  <Typography sx={{ width: "60%" }}>{row.name}</Typography>
+                </Box>
               </TableCell>
               <TableCell>{row.LastPrice}</TableCell>
               <TableCell>{row.prc}</TableCell>
@@ -74,6 +84,18 @@ export default function BasicTable({ data, name }) {
               <TableCell>{row.dayLow}</TableCell>
               <TableCell>{row.Coins}</TableCell>
               <TableCell>{row.MarketCup}</TableCell>
+              <TableCell>
+                <Button
+                  component={Link}
+                  to={"/dashboard/cryptocurrecy/item"}
+                  onClick={() => {
+                    dispatch({ type: CRYPTO_ITEM_SET, payload: row.Symbol });
+                  }}
+                  variant="contained"
+                >
+                  more
+                </Button>
+              </TableCell>
             </TableRow>
           ))}
         </TableBody>

@@ -51,7 +51,7 @@ app.use("/*", function (req, res) {
 });
 
 //frontend build server for reverse-proxy with nginx server
-app.listen({ host: process.env.LOCAL_HOST, port: process.env.FRONT_PORT }, () =>
+app.listen(8989, () =>
   console.log(`Listening on http://localhost:${process.env.FRONT_PORT}/`)
 );
 

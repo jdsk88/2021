@@ -36,3 +36,6 @@ export const CRYPTO_LINECHART_SET = "@crypto/line_chart_set";
 export const CRYPTO_LINECHART_GET = "@crypto/line_chart_get";
 export const CRYPTO_TABLE_GET = "@crypto/TABLE_GET";
 export const CRYPTO_TABLE_SET = "@crypto/TABLE_SET";
+export const CRYPTO_ITEM_SET = "@crypto/ITEM_SET";
+export const CRYPTO_ITEM_GET = "@crypto/ITEM_GET";
+export const CRYPTO_ITEM_CLEAR = "@crypto/ITEM_CLEAR";
