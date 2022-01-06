@@ -38,11 +38,13 @@ Inside your terminal type commands below:
 
 1.Nodejs
 
-2.Reactjs
+2.MongoDb
 
-3.Electronjs
+3.React + Redux
 
-4.MongoDb
+4.Electronjs
+
+
 
 # monitoring cloud mongo operations:  (ister.pl) 
 
