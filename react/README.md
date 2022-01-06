@@ -1,0 +1,1 @@
+monitoring mongo operations: https://cloud.mongodb.com/freemonitoring/cluster/YTUQCPYYCK7GLX5LUBGBWMECR4IK3OVA 

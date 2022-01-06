@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "start": "nodemon -r dotenv/config --experimental-modules ./src/index.js",
-    "app": "concurrently \"node -r dotenv/config --experimental-modules src/index.js\" \" cd ../electron && npm start\"",
+    "app": "concurrently \"node -r dotenv/config --experimental-modules src/index.js\" \"sleep 1 && cd ../electron && npm start\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
