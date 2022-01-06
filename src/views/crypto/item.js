@@ -20,7 +20,7 @@ import moment from "moment";
 
 function CoinContentItem() {
   const dispatch = useDispatch();
-  let limit;
+  let limit = 1000000000000;
   React.useEffect(() => {
     CryptoServices.getWidgetData(dispatch, item[0] || "btc");
     CryptoServices.getSymbols(dispatch);
@@ -120,13 +120,13 @@ function CoinContentItem() {
       },
     ],
     type: "area",
+    height: 400,
     options: {
       chart: {
         id: "item_chart",
         toolbar: {
           show: true,
         },
-        height: window.innerHeight - 165,
         zoom: {
           enabled: true,
         },
@@ -196,6 +196,11 @@ function CoinContentItem() {
     CryptoServices.getAllHistoryData(dispatch, value);
     dispatch({ type: CRYPTO_HISTORY_GET });
     CryptoServices.getWidgetData(dispatch, value);
+  };
+
+  const handleNativeSelectFilter = (limit) => {
+    CryptoServices.getAllHistoryData(dispatch, cryptocharts[0].symbol, limit);
+    dispatch({ type: CRYPTO_HISTORY_GET });
   };
 
   return (
@@ -286,8 +291,29 @@ function CoinContentItem() {
           {cryptocharts.length < 1 ? (
             <></>
           ) : (
-            <Card>
+            <Card sx={{ display: "flex" }}>
               <Typography>{cryptocharts[0].name}</Typography>
+              <FormControl>
+                <NativeSelect
+                  variant="filled"
+                  onChange={(e) =>
+                    handleNativeSelectFilter(e.currentTarget.value)
+                  }
+                >
+                  <option disabled value={100000000000000}>
+                    Choose cryptocurrency (default: 1mld entries)
+                  </option>
+                  {[
+                    { name: "1 hour", value: 144 },
+                    { name: "5 hour", value: 720 },
+                    { name: "1 day", value: 3456 },
+                    { name: "1 month", value: 103680 },
+                    { name: "1 year", value: 1261440 },
+                  ].map((symbol) => (
+                    <option value={symbol.value}>{symbol.name}</option>
+                  ))}
+                </NativeSelect>
+              </FormControl>
             </Card>
           )}
         </Grid>

@@ -33,6 +33,7 @@ data.data.forEach((element) => {
 const routes = express.Router({});
 routes.get("/database/:symbol/:limit", async (req, res) => {
   const { symbol, limit } = req.params;
+  console.log(limit);
   let LIMIT = 0;
   if (limit == "24hours") {
     LIMIT = 144;
@@ -44,7 +45,7 @@ routes.get("/database/:symbol/:limit", async (req, res) => {
     LIMIT = 60;
   }
   const result = await CryptoServices.getCryptoData({ symbol, limit });
-  console.log(result);
+  console.log(limit);
   res.send(result);
 });
 

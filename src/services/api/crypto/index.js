@@ -18,7 +18,7 @@ const CryptoServices = {
   },
   getAllHistoryData: async (dispatch, symbol, limit) => {
     const res = await api.get(
-      `/crypto/database/${symbol}/${144}`
+      `/crypto/database/${symbol}/${limit}`
     );
     return dispatch({
       type: CRYPTO_HISTORY_SET,
