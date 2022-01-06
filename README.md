@@ -5,11 +5,13 @@
 # Prerequests
 
 1.Nodejs
+
 2.MongoDb
 
 # Installation
 
 Inside your terminal type commands below:
+
 1.Clone repozitory and open it:
 
 - git clone https://github.com/jdsk88/2021.git && cd 2021
@@ -35,8 +37,11 @@ Inside your terminal type commands below:
 # Used Technolochy:
 
 1.Nodejs
+
 2.Reactjs
+
 3.Electronjs
+
 4.MongoDb
 
 # monitoring cloud mongo operations:
