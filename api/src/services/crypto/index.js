@@ -9,10 +9,13 @@ const CoinGeckoClient = new CoinGecko();
 //3. Make calls
 let data = await CoinGeckoClient.coins.all();
 
-const getCryptoData = async () => {
-  return Crypto.find();
+const getCryptoData = async ({ symbol, limit }) => {
+  return Crypto.find({
+    symbol: {
+      $regex: symbol || "",
+    },
+  }).limit(limit);
 };
-
 
 const createCryptoData = async ({
   symbol,
@@ -34,6 +37,7 @@ const createCryptoData = async ({
   });
   return result.save();
 };
+
 setInterval(() => {
   console.log("saved");
   data.data.forEach((element) => {

@@ -12,6 +12,9 @@ import {
   CRYPTO_ITEM_SET,
   CRYPTO_ITEM_GET,
   CRYPTO_ITEM_CLEAR,
+  CRYPTO_HISTORY_SET,
+  CRYPTO_HISTORY_GET,
+  CRYPTO_HISTORY_CLEAR,
 } from "../actions.js";
 
 export const initialState = {
@@ -21,11 +24,12 @@ export const initialState = {
   lineChart: [],
   table: [],
   item: [],
+  history: [],
 };
 
 const cryptoReducer = (state = initialState, action) => {
   let rows = [];
-  console.log(state.item, action ? action : "NO ACTION YET");
+  console.log(state, action ? action.payload : "NO ACTION YET");
   switch (action.type) {
     case CRYPTO_ADD:
       return { ...state, data: [action.payload] };
@@ -56,6 +60,13 @@ const cryptoReducer = (state = initialState, action) => {
       return { ...state, item: [...state.item] };
     case CRYPTO_ITEM_CLEAR:
       return { ...state, item: [] };
+
+    case CRYPTO_HISTORY_SET:
+      return { ...state, history: [action.payload] };
+    case CRYPTO_HISTORY_GET:
+      return { ...state, history: [...state.history] };
+    case CRYPTO_HISTORY_CLEAR:
+      return { ...state, history: [] };
     default:
       return state;
   }

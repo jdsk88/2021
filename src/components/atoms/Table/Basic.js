@@ -15,6 +15,8 @@ import { Link } from "react-router-dom";
 export default function BasicTable({ data, name }) {
   const dispatch = useDispatch();
   const cryptocurrencies = useSelector((state) => state.crypto.data);
+  const item = useSelector((state) => state.crypto.item);
+
   let rows = [];
   if (cryptocurrencies[0].length > 1) {
     cryptocurrencies[0].forEach((element, i) => {

@@ -63,7 +63,7 @@ app.listen(
   },
   () =>
     console.log(
-      `Listening on http://${process.env.HOST}:${process.env.DATA_PORT}/`
+      `Listening on http://${process.env.REMOTE_HOST}:${process.env.DATA_PORT}/`
     )
 );
 export default routes;

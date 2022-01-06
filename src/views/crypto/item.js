@@ -10,23 +10,51 @@ import {
   GLOBAL_CLICKER_STATE,
   CRYPTO_ITEM_GET,
   CRYPTO_ITEM_CLEAR,
+  CRYPTO_HISTORY_GET,
+  CRYPTO_ALL,
 } from "store/actions";
 import CryptoServices from "services/api/crypto";
+
 function CoinContentItem() {
   const dispatch = useDispatch();
+  let limit;
   React.useEffect(() => {
     CryptoServices.getWidgetData(dispatch, item[0] || "btc");
     CryptoServices.getSymbols(dispatch);
+    CryptoServices.getAllHistoryData(dispatch, item[0] || "btc", limit);
+    CryptoServices.getAllData(dispatch);
+    dispatch({ type: CRYPTO_ALL });
     dispatch({ type: CRYPTO_CODES });
     dispatch({ type: CRYPTO_CODES_GET });
     dispatch({ type: GLOBAL_CLICKER_STATE });
     dispatch({ type: CRYPTO_WIDGETDATA });
     dispatch({ type: CRYPTO_ITEM_GET });
   }, [dispatch]);
+  const data = useSelector((state) => state.crypto.data);
   const cryptocharts = useSelector((state) => state.crypto.widgets);
   const item = useSelector((state) => state.crypto.item);
-
   const crypto_symbols = useSelector((state) => state.crypto.symbols);
+  const history = useSelector((state) => state.crypto.history);
+  console.log(data.find((element) => element.symbol === "btc"));
+
+  console.log(Array.from(data[0]).find((element) => element.symbol === "btc"));
+
+  let price_history = [];
+  let time_history = [];
+  if (history.length > 0) {
+    history.forEach((element) => {
+      element.forEach((el) => {
+        price_history.push(el.market_data.current_price.usd);
+        let d = el.time.replace(/T/g, " ");
+        let t = el.time.replace(/.000Z/g, " ");
+        let dt = `${d} ${t}`;
+        time_history.push();
+        // }
+      });
+    });
+  }
+
+  console.log(price_history);
 
   const crypto = {
     height: 400,
@@ -63,66 +91,21 @@ function CoinContentItem() {
     ],
   };
 
-  var options = {
-    height: 400,
-    type: "area",
-    options: {
-      chart: {
-        id: "market-sale-chart",
-        toolbar: {
-          show: true,
-        },
-        zoom: {
-          enabled: true,
-        },
-        sparkline: {
-          enabled: false,
-        },
-      },
-      dataLabels: {
-        enabled: false,
-      },
-      stroke: {
-        curve: "smooth",
-        width: 2,
-      },
-      fill: {
-        type: "gradient",
-        gradient: {
-          shadeIntensity: 1,
-          opacityFrom: 0.5,
-          opacityTo: 0,
-          stops: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
-        },
-      },
-      legend: {
-        show: false,
-      },
-      yaxis: {
-        min: 1,
-        max: 100,
-        labels: {
-          show: false,
-        },
-      },
-    },
+  var chartData = {
     series: [
       {
-        name: cryptocharts[0] ? cryptocharts[0].name : null,
-        data: cryptocharts.length > 0 ? cryptocharts[0].current : null,
+        name: item ? item[0] : "",
+        data: price_history.length > 0 ? price_history : [0],
       },
     ],
-  };
-
-  var optionsbig = {
-    height: window.innerHeight - 165,
     type: "area",
     options: {
       chart: {
-        id: "market-sale-chart",
+        id: "item_chart",
         toolbar: {
-          show: true,
+          show: false,
         },
+        height: window.innerHeight - 165,
         zoom: {
           enabled: true,
         },
@@ -134,39 +117,57 @@ function CoinContentItem() {
         enabled: false,
       },
       stroke: {
+        show: true,
         curve: "smooth",
+        lineCap: "butt",
+        colors: undefined,
         width: 2,
+        dashArray: 0,
       },
-      fill: {
-        type: "gradient",
-        gradient: {
-          shadeIntensity: 1,
-          opacityFrom: 0.5,
-          opacityTo: 0,
-          stops: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+      title: {
+        text: item ? item[0] : "",
+        align: "center",
+      },
+      grid: {
+        row: {
+          colors: ["black", "transparent"], // takes an array which will be repeated on columns
+          opacity: 0.04,
         },
       },
-      legend: {
-        show: false,
+      xaxis: {
+        categories: time_history,
       },
-      yaxis: {
-        min: 1,
-        max: 100,
-        labels: {
-          show: false,
+    },
+  };
+
+  var bar = {
+    type: "bar",
+    height: 400,
+    options: {
+      plotOptions: {
+        bar: {
+          borderRadius: 4,
+          horizontal: false,
         },
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      xaxis: {
+        categories: ["bitcoin", "etherum"],
       },
     },
     series: [
       {
-        name: cryptocharts[0] ? cryptocharts[0].name : null,
-        data: cryptocharts.length > 0 ? cryptocharts[0].current : null,
+        data: [500, 4000],
       },
     ],
   };
 
   const handleNativeSelect = (value) => {
     dispatch({ type: CRYPTO_ITEM_CLEAR });
+    CryptoServices.getAllHistoryData(dispatch, value);
+    dispatch({ type: CRYPTO_HISTORY_GET });
     CryptoServices.getWidgetData(dispatch, value);
   };
 
@@ -226,7 +227,7 @@ function CoinContentItem() {
             <></>
           ) : (
             <>
-              <ApexChart data={options} />
+              <ApexChart data={bar} />
             </>
           )}
         </Grid>
@@ -262,12 +263,21 @@ function CoinContentItem() {
             </Card>
           )}
         </Grid>
-        <Grid item xs={12} sm={12} md={12} xl={12}>
+        {/* <Grid item xs={12} sm={12} md={12} xl={12}>
           {cryptocharts.length < 1 ? (
             <></>
           ) : (
             <>
               <ApexChart data={optionsbig} />
+            </>
+          )}
+        </Grid> */}
+        <Grid item xs={12} sm={12} md={12} xl={12}>
+          {cryptocharts.length < 1 ? (
+            <></>
+          ) : (
+            <>
+              <ApexChart data={chartData} />
             </>
           )}
         </Grid>

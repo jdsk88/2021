@@ -4,6 +4,7 @@ import {
   CRYPTO_ERROR,
   CRYPTO_LINECHART_SET,
   CRYPTO_WIDGETDATA_SET,
+  CRYPTO_HISTORY_SET,
 } from "store/actions";
 import api from "../index";
 
@@ -12,6 +13,15 @@ const CryptoServices = {
     const res = await api.get(`/crypto/currencies/all`);
     return dispatch({
       type: CRYPTO_ADD,
+      payload: res.data,
+    });
+  },
+  getAllHistoryData: async (dispatch, symbol, limit) => {
+    const res = await api.get(
+      `/crypto/database/${symbol}/${144}`
+    );
+    return dispatch({
+      type: CRYPTO_HISTORY_SET,
       payload: res.data,
     });
   },
