@@ -12,8 +12,11 @@ import {
   CRYPTO_ITEM_CLEAR,
   CRYPTO_HISTORY_GET,
   CRYPTO_ALL,
+  CRYPTO_BTC_CURRENT_USD,
 } from "store/actions";
 import CryptoServices from "services/api/crypto";
+import { element } from "prop-types";
+import moment from "moment";
 
 function CoinContentItem() {
   const dispatch = useDispatch();
@@ -24,23 +27,28 @@ function CoinContentItem() {
     CryptoServices.getAllHistoryData(dispatch, item[0] || "btc", limit);
     CryptoServices.getAllData(dispatch);
     dispatch({ type: CRYPTO_ALL });
+    dispatch({ type: CRYPTO_BTC_CURRENT_USD });
     dispatch({ type: CRYPTO_CODES });
     dispatch({ type: CRYPTO_CODES_GET });
     dispatch({ type: GLOBAL_CLICKER_STATE });
     dispatch({ type: CRYPTO_WIDGETDATA });
     dispatch({ type: CRYPTO_ITEM_GET });
   }, [dispatch]);
+
   const data = useSelector((state) => state.crypto.data);
   const cryptocharts = useSelector((state) => state.crypto.widgets);
+
+  const item_price = cryptocharts[0] ? cryptocharts[0].price.usd : 0;
+  const item_name = cryptocharts[0] ? cryptocharts[0].name : undefined;
+
   const item = useSelector((state) => state.crypto.item);
   const crypto_symbols = useSelector((state) => state.crypto.symbols);
   const history = useSelector((state) => state.crypto.history);
-  console.log(data.find((element) => element.symbol === "btc"));
-
-  console.log(Array.from(data[0]).find((element) => element.symbol === "btc"));
 
   let price_history = [];
   let time_history = [];
+  let time_history_NewDate = [];
+
   if (history.length > 0) {
     history.forEach((element) => {
       element.forEach((el) => {
@@ -48,13 +56,25 @@ function CoinContentItem() {
         let d = el.time.replace(/T/g, " ");
         let t = el.time.replace(/.000Z/g, " ");
         let dt = `${d} ${t}`;
-        time_history.push();
-        // }
+        time_history.push(Date.parse(el.time));
       });
     });
   }
-
-  console.log(price_history);
+  console.log(time_history);
+  console.log(
+    new Date(time_history[0]).getFullYear(),
+    new Date(time_history[0]).getMonth(),
+    new Date(time_history[0]).getDay(),
+    new Date(time_history[0]).getHours(),
+    new Date(time_history[0]).getMinutes()
+  );
+  if (time_history.length > 0) {
+    time_history.forEach((element) => {
+      time_history_NewDate.push(moment(element).format("YYYY MMM Do, h:mm:ss"));
+      // time_history_NewDate.push(new Date(element));
+    });
+  }
+  console.log(time_history_NewDate);
 
   const crypto = {
     height: 400,
@@ -64,7 +84,7 @@ function CoinContentItem() {
         id: "crypto-chart",
         // stacked: true,
         zoom: {
-          enabled: true,
+          enabled: false,
         },
       },
       plotOptions: {
@@ -86,6 +106,7 @@ function CoinContentItem() {
     },
     series: [
       {
+        name: cryptocharts.length > 0 ? cryptocharts[0].name : null,
         data: cryptocharts.length > 0 ? cryptocharts[0].current : null,
       },
     ],
@@ -103,7 +124,7 @@ function CoinContentItem() {
       chart: {
         id: "item_chart",
         toolbar: {
-          show: false,
+          show: true,
         },
         height: window.innerHeight - 165,
         zoom: {
@@ -135,7 +156,7 @@ function CoinContentItem() {
         },
       },
       xaxis: {
-        categories: time_history,
+        categories: time_history_NewDate,
       },
     },
   };
@@ -154,12 +175,18 @@ function CoinContentItem() {
         enabled: false,
       },
       xaxis: {
-        categories: ["bitcoin", "etherum"],
+        categories: [
+          // "bitcoin",
+          item_name,
+        ],
       },
     },
     series: [
       {
-        data: [500, 4000],
+        data: [
+          // btc_price,
+          item_price.toFixed(2),
+        ],
       },
     ],
   };
@@ -218,7 +245,8 @@ function CoinContentItem() {
             <></>
           ) : (
             <Card>
-              <Typography>{cryptocharts[0].name}</Typography>
+              {/* <Typography>{`btc <-> ${cryptocharts[0].symbol}`}</Typography> */}
+              <Typography>{item_name}</Typography>
             </Card>
           )}
         </Grid>

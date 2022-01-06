@@ -42,3 +42,4 @@ export const CRYPTO_ITEM_CLEAR = "@crypto/ITEM_CLEAR";
 export const CRYPTO_HISTORY_SET = "@crypto/HISTORY_SET";
 export const CRYPTO_HISTORY_GET = "@crypto/HISTORY_GET";
 export const CRYPTO_HISTORY_CLEAR = "@crypto/HISTORY_CLEAR";
+export const CRYPTO_BTC_CURRENT_USD = "@crypto/BTC_CURRENT_USD";

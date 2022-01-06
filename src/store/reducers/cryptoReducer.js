@@ -1,3 +1,4 @@
+import data from "store/data/charts/Candlestick/index.js";
 import {
   CRYPTO_ADD,
   CRYPTO_ALL,
@@ -15,6 +16,7 @@ import {
   CRYPTO_HISTORY_SET,
   CRYPTO_HISTORY_GET,
   CRYPTO_HISTORY_CLEAR,
+  CRYPTO_BTC_CURRENT_USD,
 } from "../actions.js";
 
 export const initialState = {
@@ -25,15 +27,21 @@ export const initialState = {
   table: [],
   item: [],
   history: [],
+  btc_current_usd: [],
 };
 
 const cryptoReducer = (state = initialState, action) => {
   let rows = [];
+  let btc = [];
+  // console.log(state.data[0] ? state.data[0][0].marketData.current_price.usd : " no data");
+
   console.log(state, action ? action.payload : "NO ACTION YET");
   switch (action.type) {
     case CRYPTO_ADD:
+      btc = [];
       return { ...state, data: [action.payload] };
     case CRYPTO_ALL:
+      btc = state.data[0] && state.data[0][0].marketData.current_price.usd;
       return { ...state, data: [...state.data] };
     case CRYPTO_CODES:
       return { ...state, symbols: [action.payload] };
@@ -67,6 +75,14 @@ const cryptoReducer = (state = initialState, action) => {
       return { ...state, history: [...state.history] };
     case CRYPTO_HISTORY_CLEAR:
       return { ...state, history: [] };
+    case CRYPTO_BTC_CURRENT_USD:
+      // const btc_price = state.data[0]
+      //   ? state.data[0][0].marketData.current_price.usd
+      //   : 0;
+      // if (state.btc_current_usd.length > 0) {
+      //   state.data[0].btc_current_usd = [];
+      // }
+      return { ...state, btc_current_usd: [btc] };
     default:
       return state;
   }
