@@ -4,23 +4,23 @@
 
 # Used Technolochy:
 
-1.Nodejs
+1. Nodejs
 
-2.MongoDb
+2. MongoDb
 
-3.React + Redux
+3. React + Redux
 
-4.Electronjs
+4. Electronjs
 
 # Prerequests
 
-1.Nodejs ^16
+1. Nodejs ^16
 
-2.MongoDb ^4.4.8
+2. MongoDb ^4.4.8
 
 # Installation - Inside your terminal type commands below:
 
-1.Clone repozitory and open it:
+1. Clone repozitory and open it:
 
 - git clone https://github.com/jdsk88/2021.git && cd 2021
 
