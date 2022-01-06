@@ -1,6 +1,6 @@
 # Full stack application
 
-1. CRUD Methods and communicate with others api
+- CRUD Methods and communicate with others api
 
 # Used Technolochy:
 
@@ -20,7 +20,7 @@
 
 # Installation
 
-Inside your terminal type commands below:
+- Inside your terminal type commands below:
 
 1.Clone repozitory and open it:
 
@@ -46,6 +46,6 @@ Inside your terminal type commands below:
 
 
 
-# monitoring cloud mongo operations:  (ister.pl) 
+- monitoring cloud mongo operations:  (ister.pl) 
 
-https://cloud.mongodb.com/freemonitoring/cluster/YTUQCPYYCK7GLX5LUBGBWMECR4IK3OVA
+- https://cloud.mongodb.com/freemonitoring/cluster/YTUQCPYYCK7GLX5LUBGBWMECR4IK3OVA
