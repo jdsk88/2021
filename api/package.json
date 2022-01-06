@@ -6,12 +6,14 @@
   "type": "module",
   "scripts": {
     "start": "nodemon -r dotenv/config --experimental-modules ./src/index.js",
+    "app": "concurrently \"node -r dotenv/config --experimental-modules src/index.js\" \" cd ../electron && npm start\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "concurrently": "7.0.0",
     "coingecko-api": "^1.0.10",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",

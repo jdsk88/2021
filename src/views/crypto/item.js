@@ -198,9 +198,13 @@ function CoinContentItem() {
     dispatch({ type: CRYPTO_HISTORY_GET });
     CryptoServices.getWidgetData(dispatch, value);
   };
-
+  const [loader, setLoading] = React.useState(false);
   const handleNativeSelectFilter = (limit) => {
-    CryptoServices.getAllHistoryData(dispatch, cryptocharts[0].symbol, limit);
+    CryptoServices.getAllHistoryData(dispatch, cryptocharts[0].symbol, limit)
+      .then(() => setLoading(true))
+      .finally(() => {
+        setLoading(false);
+      });
     dispatch({ type: CRYPTO_HISTORY_GET });
   };
 
@@ -308,9 +312,6 @@ function CoinContentItem() {
                     handleNativeSelectFilter(e.currentTarget.value)
                   }
                 >
-                  <option disabled value={100000000000000}>
-                    Choose cryptocurrency (default: 1mld entries)
-                  </option>
                   {[
                     { name: "1 hour", value: 10 },
                     { name: "5 hour", value: 50 },
@@ -339,7 +340,11 @@ function CoinContentItem() {
             <></>
           ) : (
             <>
-              <ApexChart data={chartData} />
+              {loader == true ? (
+                <h1>LOADER</h1>
+              ) : (
+                <ApexChart data={chartData} />
+              )}
             </>
           )}
         </Grid>
