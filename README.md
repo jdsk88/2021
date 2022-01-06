@@ -4,9 +4,9 @@
 
 # Prerequests
 
-1.Nodejs
+1.Nodejs ^16
 
-2.MongoDb
+2.MongoDb ^4.4.8
 
 # Installation
 
@@ -18,7 +18,7 @@ Inside your terminal type commands below:
 
 2. Install all dependencies:
 
-- sudo ./install.sh
+- ./install.sh
 
 # Start the application
 
@@ -44,6 +44,6 @@ Inside your terminal type commands below:
 
 4.MongoDb
 
-# monitoring cloud mongo operations:
+# monitoring cloud mongo operations:  (ister.pl) 
 
 https://cloud.mongodb.com/freemonitoring/cluster/YTUQCPYYCK7GLX5LUBGBWMECR4IK3OVA
