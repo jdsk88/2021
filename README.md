@@ -18,9 +18,7 @@
 
 2.MongoDb ^4.4.8
 
-# Installation
-
-- Inside your terminal type commands below:
+# Installation - Inside your terminal type commands below:
 
 1.Clone repozitory and open it:
 
