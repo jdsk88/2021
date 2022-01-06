@@ -17,6 +17,7 @@ import {
 import CryptoServices from "services/api/crypto";
 import { element } from "prop-types";
 import moment from "moment";
+import { Box } from "@mui/system";
 
 function CoinContentItem() {
   const dispatch = useDispatch();
@@ -291,8 +292,15 @@ function CoinContentItem() {
           {cryptocharts.length < 1 ? (
             <></>
           ) : (
-            <Card sx={{ display: "flex" }}>
-              <Typography>{cryptocharts[0].name}</Typography>
+            <Card
+              sx={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between",
+              }}
+            >
+              <Typography>{cryptocharts[0].name} timeline chart</Typography>
+
               <FormControl>
                 <NativeSelect
                   variant="filled"
@@ -304,11 +312,11 @@ function CoinContentItem() {
                     Choose cryptocurrency (default: 1mld entries)
                   </option>
                   {[
-                    { name: "1 hour", value: 144 },
-                    { name: "5 hour", value: 720 },
-                    { name: "1 day", value: 3456 },
-                    { name: "1 month", value: 103680 },
-                    { name: "1 year", value: 1261440 },
+                    { name: "1 hour", value: 10 },
+                    { name: "5 hour", value: 50 },
+                    { name: "1 day", value: 240 },
+                    { name: "1 month", value: 7200 },
+                    { name: "1 year", value: 87600 },
                   ].map((symbol) => (
                     <option value={symbol.value}>{symbol.name}</option>
                   ))}
