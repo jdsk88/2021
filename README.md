@@ -2,6 +2,16 @@
 
 1. CRUD Methods and communicate with others api
 
+# Used Technolochy:
+
+1.Nodejs
+
+2.MongoDb
+
+3.React + Redux
+
+4.Electronjs
+
 # Prerequests
 
 1.Nodejs ^16
@@ -33,16 +43,6 @@ Inside your terminal type commands below:
 3. Backend dev server with electron window:
 
 - cd api && npm run app
-
-# Used Technolochy:
-
-1.Nodejs
-
-2.MongoDb
-
-3.React + Redux
-
-4.Electronjs
 
 
 
