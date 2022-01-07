@@ -5,7 +5,7 @@ import {
 } from "../actions.js";
 export const initialState = { clicks: [], keylogs: [] };
 const globalReducer = (state = initialState, action) => {
-  console.log(state, action ? action : "NO ACTION YET");
+  // console.log(state, action ? action : "NO ACTION YET");
   switch (action.type) {
     case GLOBAL_MOUSE_CLICK_COUNTER:
       return { ...state, clicks: [...state.clicks, action.payload] };

@@ -34,7 +34,7 @@ const LayoutMain = () => {
   useEffect(() => {
     setURL(url);
   }, [url]);
-  
+
   useEffect(() => {
     dispatch({ type: GLOBAL_CLICKER_STATE });
   }, [url, dispatch]);
@@ -62,7 +62,7 @@ const LayoutMain = () => {
             <Container
               maxWidth="xxl"
               component="main"
-              sx={{ pt: 0, pb: 3, mt: 1 }}
+              sx={{ pt: 0, pb: 3, mt: 1, background: "#070d3e" }}
             >
               <Grid container spacing={1} alignItems="flex-end">
                 <IconBreadcrumbs url={URL} />

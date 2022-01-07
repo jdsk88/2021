@@ -1,6 +1,7 @@
 import express from "express";
 import CoinGecko from "coingecko-api";
 import { CryptoServices } from "../services/crypto/index.js";
+import { CoinGeckoServices } from "../services/crypto/cryptotest.js";
 
 const CoinGeckoClient = new CoinGecko();
 let data = await CoinGeckoClient.coins.all();
@@ -90,27 +91,17 @@ routes.get("/currencies/widgetdata/:currency", async (req, res) => {
   res.send(widgetdata);
 });
 
-// routes.post("/create", async (req, res) => {
-//   const {
-//     symbol,
-//     name,
-//     block_time_in_minutes,
-//     image,
-//     market_data,
-//     last_updated,
-//     localization,
-//   } = req.body;
-//   const result = await CryptoServices.createCryptoData({
-//     symbol,
-//     name,
-//     block_time_in_minutes,
-//     image,
-//     market_data,
-//     last_updated,
-//     localization,
-//   });
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.send(result);
-// });
+routes.get("/coingeckoapi/history/:currency/:date", async (req, res) => {
+  const { currency, date } = req.params;
+  const result = await CoinGeckoServices.fetchHistory(currency,date);
+  console.log(result);
+  res.send(result);
+});
+routes.get("/coingeckoapi/chart/:currency", async (req, res) => {
+  const { currency } = req.params;
+  const result = await CoinGeckoServices.fetchMarketChart(currency);
+  console.log(result);
+  res.send(result);
+});
 
 export default routes;

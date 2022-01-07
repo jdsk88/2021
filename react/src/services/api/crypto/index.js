@@ -5,6 +5,7 @@ import {
   CRYPTO_LINECHART_SET,
   CRYPTO_WIDGETDATA_SET,
   CRYPTO_HISTORY_SET,
+  COINGECKOAPI_CHART,
 } from "store/actions";
 import api from "../index";
 
@@ -17,9 +18,7 @@ const CryptoServices = {
     });
   },
   getAllHistoryData: async (dispatch, symbol, limit) => {
-    const res = await api.get(
-      `/crypto/database/${symbol}/${limit}`
-    );
+    const res = await api.get(`/crypto/database/${symbol}/${limit}`);
     return dispatch({
       type: CRYPTO_HISTORY_SET,
       payload: res.data,
@@ -43,6 +42,13 @@ const CryptoServices = {
     const res = await api.get(`/crypto/currencies/widgetdata/lineChart`);
     return dispatch({
       type: CRYPTO_LINECHART_SET,
+      payload: res.data,
+    });
+  },
+  getChart: async (dispatch, currency) => {
+    const res = await api.get(`/crypto/coingeckoapi/chart/${currency}`);
+    return dispatch({
+      type: COINGECKOAPI_CHART,
       payload: res.data,
     });
   },

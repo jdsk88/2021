@@ -13,7 +13,7 @@ import {
 export const initialState = { cards: [], descriptions: [] };
 
 const pricingReducer = (state = initialState, action) => {
-  console.log(state, action ? action : "NO ACTION YET");
+  // console.log(state, action ? action : "NO ACTION YET");
   switch (action.type) {
     case SET_ITEMS:
       return { ...state, cards: [...state.cards, action.payload] };

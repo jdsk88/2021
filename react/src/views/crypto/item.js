@@ -13,11 +13,13 @@ import {
   CRYPTO_HISTORY_GET,
   CRYPTO_ALL,
   CRYPTO_BTC_CURRENT_USD,
+  COINGECKOAPI_CHART_GET,
 } from "store/actions";
 import CryptoServices from "services/api/crypto";
 import { element } from "prop-types";
 import moment from "moment";
 import { Box } from "@mui/system";
+import InfoBox from "components/atoms/infoBox";
 
 function CoinContentItem() {
   const dispatch = useDispatch();
@@ -27,6 +29,8 @@ function CoinContentItem() {
     CryptoServices.getSymbols(dispatch);
     CryptoServices.getAllHistoryData(dispatch, item[0] || "btc", limit);
     CryptoServices.getAllData(dispatch);
+    CryptoServices.getChart(dispatch, "bitcoin");
+    dispatch({ type: COINGECKOAPI_CHART_GET });
     dispatch({ type: CRYPTO_ALL });
     dispatch({ type: CRYPTO_BTC_CURRENT_USD });
     dispatch({ type: CRYPTO_CODES });
@@ -35,8 +39,9 @@ function CoinContentItem() {
     dispatch({ type: CRYPTO_WIDGETDATA });
     dispatch({ type: CRYPTO_ITEM_GET });
   }, [dispatch]);
-
+  const chart = useSelector((state) => state.crypto.chart);
   const data = useSelector((state) => state.crypto.data);
+  console.log(chart[0]);
   const cryptocharts = useSelector((state) => state.crypto.widgets);
 
   const item_price = cryptocharts[0] ? cryptocharts[0].price.usd : 0;
@@ -61,21 +66,21 @@ function CoinContentItem() {
       });
     });
   }
-  console.log(time_history);
-  console.log(
-    new Date(time_history[0]).getFullYear(),
-    new Date(time_history[0]).getMonth(),
-    new Date(time_history[0]).getDay(),
-    new Date(time_history[0]).getHours(),
-    new Date(time_history[0]).getMinutes()
-  );
+  // console.log(time_history);
+  // console.log(
+  //   new Date(time_history[0]).getFullYear(),
+  //   new Date(time_history[0]).getMonth(),
+  //   new Date(time_history[0]).getDay(),
+  //   new Date(time_history[0]).getHours(),
+  //   new Date(time_history[0]).getMinutes()
+  // );
   if (time_history.length > 0) {
     time_history.forEach((element) => {
       time_history_NewDate.push(moment(element).format("YYYY MMM Do, h:mm:ss"));
       // time_history_NewDate.push(new Date(element));
     });
   }
-  console.log(time_history_NewDate);
+  // console.log(time_history_NewDate);
 
   const crypto = {
     height: 400,
@@ -116,8 +121,8 @@ function CoinContentItem() {
   var chartData = {
     series: [
       {
-        name: item ? item[0] : "",
-        data: price_history.length > 0 ? price_history : [0],
+        // name: item ? item[0] : "",
+        data: chart[0] && chart[0].prices,
       },
     ],
     type: "area",
@@ -157,7 +162,7 @@ function CoinContentItem() {
         },
       },
       xaxis: {
-        categories: time_history_NewDate,
+        categories: chart[0] && chart[0].timeline,
       },
     },
   };
@@ -185,9 +190,7 @@ function CoinContentItem() {
     series: [
       {
         name: item_name,
-        data: [
-          item_price.toFixed(2),
-        ],
+        data: [item_price.toFixed(2)],
       },
     ],
   };
@@ -228,13 +231,11 @@ function CoinContentItem() {
           position: "sticky",
           top: 30,
           zIndex: 1030,
-          background: "white",
         }}
       >
         <FormControl fullWidth>
           <NativeSelect
-            variant="filled"
-            fullWidth
+            sx={{ background: "white" }}
             value={item.length < 0 ? null : item[0]}
             onChange={(e) => handleNativeSelect(e.currentTarget.value)}
           >
@@ -347,6 +348,9 @@ function CoinContentItem() {
               )}
             </>
           )}
+          <Grid item xs={12} sm={12} md={12} xl={12}>
+            <InfoBox />
+          </Grid>
         </Grid>
       </Grid>
     </>

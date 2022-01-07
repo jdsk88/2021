@@ -94,7 +94,7 @@ const chart = {
 };
 const dashboardReducer = (state = initialState, action) => {
   state.charts = [chart];
-  console.log(state, action ? action : "NO ACTION YET");
+  // console.log(state, action ? action : "NO ACTION YET");
   switch (action.type) {
     case DASHBOARD_ADD_ITEM:
       return { ...state, charts: [...state.charts, action.payload] };

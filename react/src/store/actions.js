@@ -43,3 +43,5 @@ export const CRYPTO_HISTORY_SET = "@crypto/HISTORY_SET";
 export const CRYPTO_HISTORY_GET = "@crypto/HISTORY_GET";
 export const CRYPTO_HISTORY_CLEAR = "@crypto/HISTORY_CLEAR";
 export const CRYPTO_BTC_CURRENT_USD = "@crypto/BTC_CURRENT_USD";
+export const COINGECKOAPI_CHART = "@crypto/COINGECKOAPI_CHART_SET";
+export const COINGECKOAPI_CHART_GET = "@crypto/COINGECKOAPI_CHART_GET";

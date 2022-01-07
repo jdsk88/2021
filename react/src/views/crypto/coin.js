@@ -14,7 +14,6 @@ function CoinContent() {
   const dispatch = useDispatch();
 
   const cryptocharts = useSelector((state) => state.crypto.widgets);
-  console.log(cryptocharts);
   const crypto_symbols = useSelector((state) => state.crypto.symbols);
 
   const crypto = {
@@ -159,6 +158,8 @@ function CoinContent() {
   };
   React.useEffect(() => {
     CryptoServices.getSymbols(dispatch);
+    CryptoServices.getChart(dispatch,"bitcoin");
+    dispatch({ type: CRYPTO_CODES });
     dispatch({ type: CRYPTO_CODES });
     dispatch({ type: CRYPTO_CODES_GET });
     dispatch({ type: GLOBAL_CLICKER_STATE });

@@ -17,6 +17,8 @@ import {
   CRYPTO_HISTORY_GET,
   CRYPTO_HISTORY_CLEAR,
   CRYPTO_BTC_CURRENT_USD,
+  COINGECKOAPI_CHART,
+  COINGECKOAPI_CHART_GET,
 } from "../actions.js";
 
 export const initialState = {
@@ -28,14 +30,15 @@ export const initialState = {
   item: [],
   history: [],
   btc_current_usd: [],
+  chart: [],
 };
 
 const cryptoReducer = (state = initialState, action) => {
   let rows = [];
   let btc = [];
   // console.log(state.data[0] ? state.data[0][0].marketData.current_price.usd : " no data");
+  // console.log(state, action ? action.payload : "NO ACTION YET");
 
-  console.log(state, action ? action.payload : "NO ACTION YET");
   switch (action.type) {
     case CRYPTO_ADD:
       btc = [];
@@ -83,6 +86,10 @@ const cryptoReducer = (state = initialState, action) => {
       //   state.data[0].btc_current_usd = [];
       // }
       return { ...state, btc_current_usd: [btc] };
+    case COINGECKOAPI_CHART:
+      return { ...state, chart: [action.payload] };
+    case COINGECKOAPI_CHART_GET:
+      return { ...state, chart: [...state.chart] };
     default:
       return state;
   }
