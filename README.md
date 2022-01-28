@@ -1,6 +1,6 @@
 # Full stack application
 
-- CRUD Methods and communicate with others api
+- CRUD Methods
 
 # Used Technolochy:
 
